@@ -9,8 +9,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: base, changeFrequency: "monthly", priority: 1 },
     { url: `${base}/proyecto-desde-cero`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/proyecto-ya-construido`, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/estrategia`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${base}/disciplinas`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/portafolio`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/equipo`, changeFrequency: "yearly", priority: 0.6 },
+    { url: `${base}/equipo`, changeFrequency: "yearly", priority: 0.4 },
     { url: `${base}/contacto`, changeFrequency: "yearly", priority: 0.7 },
   ];
 

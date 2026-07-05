@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Suspense } from "react";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
@@ -44,6 +45,28 @@ export default function ContactoPage() {
           <h1 className="mt-8 max-w-[20ch] text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-[1.12] text-ink">
             Conversemos sobre tu proyecto.
           </h1>
+          <p className="mt-7 max-w-[58ch] text-lg font-light leading-[1.7] text-charcoal">
+            Ya sea que estés iniciando una inversión o buscando elevar el
+            valor de una propiedad existente, podemos ayudarte a definir el
+            siguiente paso con claridad.
+          </p>
+          {/* Dos rutas claras: preseleccionan la etapa en el formulario */}
+          <div className="mt-9 flex flex-wrap gap-4">
+            <Link
+              href="/contacto?etapa=desde-cero"
+              scroll={false}
+              className="inline-block border border-ink px-6 py-3.5 text-[0.72rem] font-normal uppercase tracking-[0.14em] text-ink transition-colors duration-300 hover:bg-ink hover:text-white"
+            >
+              Quiero desarrollar un proyecto desde 0
+            </Link>
+            <Link
+              href="/contacto?etapa=construido"
+              scroll={false}
+              className="inline-block border border-ink px-6 py-3.5 text-[0.72rem] font-normal uppercase tracking-[0.14em] text-ink transition-colors duration-300 hover:bg-ink hover:text-white"
+            >
+              Quiero diagnosticar una propiedad existente
+            </Link>
+          </div>
         </div>
       </section>
 

@@ -10,8 +10,9 @@ const navLinks = [
   { href: "/", label: "Inicio" },
   { href: "/proyecto-desde-cero", label: "Proyecto desde 0" },
   { href: "/proyecto-ya-construido", label: "Proyecto ya construido" },
+  { href: "/estrategia", label: "Estrategia 19.89" },
+  { href: "/disciplinas", label: "Disciplinas" },
   { href: "/portafolio", label: "Portafolio" },
-  { href: "/equipo", label: "Equipo" },
   { href: "/contacto", label: "Contacto" },
 ];
 
@@ -20,6 +21,7 @@ const darkHeroRoutes = [
   "/",
   "/proyecto-desde-cero",
   "/proyecto-ya-construido",
+  "/estrategia",
   "/portafolio",
 ];
 
@@ -110,13 +112,13 @@ export default function Navbar() {
         <Link
           href="/"
           className="transition-opacity duration-300 hover:opacity-70"
-          aria-label="19°89° Arquitectura — Inicio"
+          aria-label="19.89 Arquitectura — Inicio"
         >
           <Logo variant="mark" className="text-[1.05rem]" />
         </Link>
 
         {/* Navegación de escritorio */}
-        <nav aria-label="Principal" className="hidden items-center gap-8 min-[920px]:flex">
+        <nav aria-label="Principal" className="hidden items-center gap-6 min-[1200px]:flex">
           {navLinks.map((link) => {
             const active = isActive(pathname, link.href);
             return (
@@ -124,7 +126,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className="group relative py-1 text-[0.72rem] font-normal uppercase tracking-[0.18em]"
+                className="group relative py-1 text-[0.66rem] font-normal uppercase tracking-[0.15em]"
               >
                 {link.label}
                 <span
@@ -138,7 +140,7 @@ export default function Navbar() {
           })}
         </nav>
 
-        <div className="hidden min-[920px]:block">
+        <div className="hidden min-[1200px]:block">
           <Link
             href={siteConfig.calendarUrl}
             className="inline-block bg-earth px-5 py-2.5 text-[0.72rem] font-normal uppercase tracking-[0.14em] text-white transition-colors duration-300 hover:bg-earth-dark"
@@ -155,7 +157,7 @@ export default function Navbar() {
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
           aria-label="Abrir menú"
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 min-[920px]:hidden"
+          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 min-[1200px]:hidden"
         >
           <span aria-hidden="true" className="block h-px w-6 bg-current" />
           <span aria-hidden="true" className="block h-px w-6 bg-current" />
@@ -196,7 +198,7 @@ export default function Navbar() {
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
                   aria-current={active ? "page" : undefined}
-                  className={`text-[1.35rem] font-light uppercase tracking-[0.24em] transition-colors duration-300 ${
+                  className={`text-[1.2rem] font-light uppercase tracking-[0.2em] transition-colors duration-300 ${
                     active ? "text-earth" : "text-white hover:text-stone"
                   }`}
                 >

@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site-config";
 // TODO: cuando exista fotografía oficial de hero, puede reemplazarse por
 // una imagen real exportada a /public (y borrar este archivo).
 
-export const alt = "19°89° Arquitectura — Arquitectura e inversión con valor";
+export const alt = "19.89 Arquitectura — Arquitectura e inversión con valor";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "19°89° Arquitectura",
+  name: "19.89 Arquitectura", // forma editorial de la marca en textos
   namePlain: "1989 Arquitectura", // para SEO y metadatos
   descriptor: "Estudio de Arquitectura — Costa Rica",
   tagline: "Arquitectura e inversión con valor",

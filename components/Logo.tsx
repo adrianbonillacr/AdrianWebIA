@@ -20,7 +20,7 @@ function DegreeDot() {
 export default function Logo({ variant = "mark", className }: LogoProps) {
   return (
     <span className={`inline-block leading-none ${className ?? ""}`}>
-      <span className="sr-only">19°89° Arquitectura</span>
+      <span className="sr-only">19.89 Arquitectura</span>
       <span aria-hidden="true" className="block">
         <span className="text-[1.45em] font-medium tracking-[0.06em]">
           19

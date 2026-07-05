@@ -75,7 +75,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
             <Reveal key={src}>
               <BrandImage
                 src={src}
-                alt={`Proyecto ${project.name} — 19°89° Arquitectura (imagen ${i + 1})`}
+                alt={`Proyecto ${project.name} — 19.89 Arquitectura (imagen ${i + 1})`}
                 tone={galleryTones[i % galleryTones.length]}
                 label={project.name}
                 className="aspect-[16/9]"

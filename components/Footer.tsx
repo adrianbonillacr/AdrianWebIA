@@ -32,7 +32,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/#disciplinas" className={footerLink}>
+              <Link href="/disciplinas" className={footerLink}>
                 Disciplinas
               </Link>
             </li>
@@ -43,13 +43,13 @@ export default function Footer() {
           <h2 className={columnHeading}>Estudio</h2>
           <ul className="mt-6 space-y-3">
             <li>
-              <Link href="/portafolio" className={footerLink}>
-                Portafolio
+              <Link href="/estrategia" className={footerLink}>
+                Estrategia 19.89
               </Link>
             </li>
             <li>
-              <Link href="/equipo" className={footerLink}>
-                Equipo
+              <Link href="/portafolio" className={footerLink}>
+                Portafolio
               </Link>
             </li>
             <li>
@@ -94,7 +94,7 @@ export default function Footer() {
 
       <div className="border-t border-stone/20">
         <div className="container-site flex flex-col gap-2 py-6 text-[0.72rem] font-light uppercase tracking-[0.18em] text-stone sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 19°89° Arquitectura</p>
+          <p>© 2026 {siteConfig.name}</p>
           <p>{siteConfig.tagline}</p>
         </div>
       </div>

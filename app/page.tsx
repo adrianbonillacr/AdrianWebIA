@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     absolute: `${siteConfig.namePlain} | Arquitectura e inversión con valor — Costa Rica`,
   },
   description:
-    "Desarrollamos, transformamos y posicionamos proyectos inmobiliarios con estrategia, diseño y visión de largo plazo. Estudio de arquitectura e inversión en Costa Rica.",
+    "Firma especializada en el desarrollo estratégico de proyectos inmobiliarios en Costa Rica. Analizamos, planificamos, diseñamos y posicionamos proyectos para convertir propiedades en activos con valor a largo plazo.",
 };
 
 const paths = [
@@ -26,7 +26,7 @@ const paths = [
     title: "Proyecto desde 0",
     tagline: "La mejor inversión comienza con la propiedad correcta.",
     description:
-      "Para quienes quieren iniciar una inversión inmobiliaria con claridad desde la primera decisión — incluso antes de comprar.",
+      "Para quienes quieren iniciar un proyecto inmobiliario con claridad desde las primeras decisiones: selección del activo, estrategia, diseño, desarrollo, identidad y posicionamiento.",
     linkLabel: "Ver proceso",
     href: "/proyecto-desde-cero",
     image: siteImages.hero.desdeCero,
@@ -37,29 +37,11 @@ const paths = [
     title: "Proyecto ya construido",
     tagline: "Medimos primero. Invertimos después.",
     description:
-      "Para quienes ya tienen una propiedad o proyecto y quieren descubrir su verdadero potencial.",
+      "Para quienes ya tienen una propiedad o proyecto en funcionamiento y quieren identificar oportunidades de mejora, priorizar inversiones y aumentar su valor.",
     linkLabel: "Ver diagnóstico",
     href: "/proyecto-ya-construido",
     image: siteImages.hero.yaConstruido,
     tone: "charcoal" as const,
-  },
-];
-
-const beliefs = [
-  {
-    title: "Diseño con intención",
-    description:
-      "El diseño más allá de lo estético: una herramienta para dar respuestas claras y conscientes a las necesidades de cada proyecto y de quienes lo habitan.",
-  },
-  {
-    title: "Asesoría de calidad",
-    description:
-      "Todo inicia con una asesoría financiera que evalúa la factibilidad y la rentabilidad del proyecto. A partir de esos lineamientos, diseñamos.",
-  },
-  {
-    title: "Conexión con el lugar",
-    description:
-      "Cada proyecto nace del entendimiento profundo del sitio: su historia, su clima y su cultura. El contexto no es un dato — es inspiración y responsabilidad.",
   },
 ];
 
@@ -90,13 +72,13 @@ export default function HomePage() {
             className="h-full w-full"
             priority
           />
-          <div className="absolute inset-0 bg-ink/50" />
+          <div className="absolute inset-0 bg-ink/55" />
         </div>
         <div className="container-site relative py-32">
           <div className="flex items-center gap-4">
             <span aria-hidden="true" className="h-[0.4rem] w-[0.4rem] rounded-full bg-mist" />
             <p className="text-[0.72rem] font-medium uppercase tracking-[0.28em] text-mist">
-              19°89° Arquitectura — Costa Rica
+              19.89 Arquitectura — Costa Rica
             </p>
           </div>
           <h1 className="mt-8 max-w-[16ch] text-[clamp(2.6rem,6.4vw,4.6rem)] font-semibold leading-[1.08]">
@@ -106,12 +88,19 @@ export default function HomePage() {
             Desarrollamos, transformamos y posicionamos proyectos inmobiliarios
             con estrategia, diseño y visión de largo plazo.
           </p>
+          <p className="mt-6 max-w-[62ch] border-l border-stone/40 pl-5 text-[0.9rem] font-light leading-[1.8] text-mist/90">
+            19.89 Arquitectura es una firma especializada en el desarrollo
+            estratégico de proyectos inmobiliarios en Costa Rica. A través de
+            la Estrategia 19.89, analizamos, planificamos, diseñamos y
+            posicionamos proyectos para convertir propiedades en activos con
+            identidad, diferenciación y valor a largo plazo.
+          </p>
           <div className="mt-11 flex flex-wrap gap-4">
             <Button href="/proyecto-desde-cero" variant="earth">
-              Quiero desarrollar un proyecto
+              Quiero desarrollar un proyecto desde 0
             </Button>
             <Button href="/proyecto-ya-construido" variant="outline-light">
-              Quiero optimizar una propiedad
+              Quiero optimizar una propiedad existente
             </Button>
           </div>
         </div>
@@ -122,6 +111,14 @@ export default function HomePage() {
           Descubrir
           <span aria-hidden="true" className="h-px w-16 bg-mist/60" />
         </a>
+        {/* Marcador editorial vertical (recurso visual del PDF) */}
+        <span
+          aria-hidden="true"
+          className="absolute bottom-10 right-6 hidden text-[0.7rem] font-light tracking-[0.4em] text-mist/50 md:block md:right-10"
+          style={{ writingMode: "vertical-rl" }}
+        >
+          20 26.
+        </span>
       </section>
 
       {/* DOS CAMINOS */}
@@ -141,7 +138,7 @@ export default function HomePage() {
                   <div className="relative overflow-hidden">
                     <BrandImage
                       src={path.image}
-                      alt={`${path.title} — 19°89° Arquitectura`}
+                      alt={`${path.title} — 19.89 Arquitectura`}
                       tone={path.tone}
                       label={path.title}
                       hoverZoom
@@ -154,7 +151,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="mt-8 text-2xl font-semibold text-ink">{path.title}</h3>
                   <p className="mt-3 font-normal italic text-earth">{path.tagline}</p>
-                  <p className="mt-4 max-w-[52ch] font-light leading-[1.7] text-charcoal">
+                  <p className="mt-4 max-w-[54ch] font-light leading-[1.7] text-charcoal">
                     {path.description}
                   </p>
                   <ArrowLink href={path.href} className="mt-6">
@@ -182,80 +179,72 @@ export default function HomePage() {
           <Reveal className="mx-auto max-w-3xl text-center">
             <SectionHeader
               eyebrow="Estrategia 19.89"
-              title="Antes de diseñar, entendemos el proyecto."
+              title="Una metodología para tomar mejores decisiones."
               dark
               align="center"
             />
             <p className="mx-auto mt-8 max-w-[62ch] font-light leading-[1.7] text-mist">
-              La Estrategia 19.89 es nuestro proceso de análisis, planificación
-              y desarrollo. Evaluamos cada proyecto desde su potencial
-              arquitectónico, financiero, comercial, visual y experiencial,
-              para orientar la inversión hacia donde realmente genera valor.
+              La Estrategia 19.89 es una metodología desarrollada para
+              acompañar proyectos residenciales, comerciales y hoteleros desde
+              sus primeras etapas hasta su consolidación. Su objetivo es
+              ayudar a propietarios e inversionistas a tomar mejores
+              decisiones, establecer prioridades y desarrollar proyectos
+              capaces de diferenciarse y generar valor a largo plazo.
             </p>
+            <div className="mt-10 flex justify-center">
+              <ArrowLink href="/estrategia">Conocer la metodología</ArrowLink>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* EN QUÉ CREEMOS */}
-      <section className="section-pad bg-mist">
-        <div className="container-site">
-          <Reveal>
-            <SectionHeader eyebrow="En qué creemos" />
-          </Reveal>
-          <div className="mt-14 grid gap-10 md:grid-cols-3">
-            {beliefs.map((belief, i) => (
-              <Reveal key={belief.title} delay={i * 120}>
-                <div className="border-t border-ink pt-6">
-                  <h3 className="text-lg font-medium text-ink">{belief.title}</h3>
-                  <p className="mt-4 max-w-[46ch] font-light leading-[1.7] text-charcoal">
-                    {belief.description}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CÓMO TRABAJAMOS */}
+      {/* DEL ANÁLISIS A LA ACCIÓN */}
       <section className="section-pad bg-white">
         <div className="container-site">
           <Reveal>
             <SectionHeader
-              eyebrow="Cómo trabajamos"
+              eyebrow="Del análisis a la acción"
               title="Un proceso que ordena las decisiones antes de invertir."
             />
           </Reveal>
-          <div className="mt-16 grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-16">
             {processSteps.map((step, i) => (
-              <Reveal key={step.number} delay={(i % 3) * 100}>
-                <div className="border-t border-stone/40 pt-6">
-                  <span className="text-[0.8rem] font-medium tracking-[0.2em] text-earth">
+              <Reveal key={step.number} delay={(i % 4) * 60}>
+                <div className="grid items-baseline gap-2 border-t border-stone/40 py-7 md:grid-cols-[7rem_16rem_1fr] md:gap-8">
+                  <span className="text-[clamp(1.8rem,3vw,2.4rem)] font-semibold leading-none text-earth">
                     {step.number}
                   </span>
-                  <h3 className="mt-3 text-lg font-medium text-ink">{step.title}</h3>
-                  <p className="mt-2 max-w-[42ch] font-light leading-[1.7] text-charcoal">
+                  <h3 className="text-lg font-medium text-ink">{step.title}</h3>
+                  <p className="max-w-[52ch] font-light leading-[1.7] text-charcoal">
                     {step.description}
                   </p>
                 </div>
               </Reveal>
             ))}
+            <div className="border-t border-stone/40" aria-hidden="true" />
           </div>
         </div>
       </section>
 
-      {/* DISCIPLINAS ESTRATÉGICAS */}
+      {/* DISCIPLINAS BAJO UNA MISMA VISIÓN */}
       <section id="disciplinas" className="section-pad bg-ink">
         <div className="container-site">
           <Reveal>
             <SectionHeader
-              eyebrow="Disciplinas estratégicas"
-              title="Todo lo que un proyecto necesita bajo una misma visión."
+              eyebrow="Disciplinas"
+              title="Disciplinas bajo una misma visión."
               dark
             />
+            <p className="mt-6 max-w-[58ch] font-light leading-[1.7] text-mist">
+              No son servicios aislados: son herramientas que se integran
+              dentro de la estrategia según las necesidades de cada proyecto.
+            </p>
           </Reveal>
-          <Reveal className="mt-16">
+          <Reveal className="mt-14">
             <DisciplineGrid />
+          </Reveal>
+          <Reveal className="mt-10">
+            <ArrowLink href="/disciplinas">Ver todas las disciplinas</ArrowLink>
           </Reveal>
         </div>
       </section>
@@ -318,10 +307,9 @@ export default function HomePage() {
         texture="madera"
         title={
           <>
-            Una propiedad puede construirse en meses.{" "}
-            <span className="text-stone">
-              Un proyecto extraordinario se construye con estrategia.
-            </span>
+            Descubrimos el potencial.{" "}
+            <span className="text-stone">Diseñamos la estrategia.</span>{" "}
+            Creamos valor.
           </>
         }
         buttonLabel="Agendar una reunión estratégica"

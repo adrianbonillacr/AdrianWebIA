@@ -6,6 +6,10 @@ export type Project = {
   categories: ProjectCategory[];
   featured?: boolean;
   excerpt?: string;
+  /** TODO: año del proyecto (se muestra en la card cuando exista). */
+  year?: string;
+  /** TODO: frase corta de la card (no inventar; solo información real). */
+  phrase?: string;
 };
 
 export const categoryLabels: Record<ProjectCategory, string> = {

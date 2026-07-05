@@ -28,7 +28,7 @@ export default function ProjectCard({
     >
       <BrandImage
         src={projectImages(project.slug).cover}
-        alt={`Proyecto ${project.name} — 19°89° Arquitectura`}
+        alt={`Proyecto ${project.name} — 19.89 Arquitectura`}
         tone={tone}
         label={project.name}
         hoverZoom
@@ -39,7 +39,13 @@ export default function ProjectCard({
         <p className="text-base font-medium text-white">{project.name}</p>
         <p className="mt-1 text-[0.66rem] font-normal uppercase tracking-[0.24em] text-mist">
           {categoryLabel(project)}
+          {project.year ? ` · ${project.year}` : ""}
         </p>
+        {project.phrase && (
+          <p className="mt-2 max-w-[46ch] text-[0.82rem] font-light leading-snug text-mist">
+            {project.phrase}
+          </p>
+        )}
       </div>
     </Link>
   );

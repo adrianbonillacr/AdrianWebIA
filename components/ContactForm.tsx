@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { buttonClasses } from "@/components/Button";
 
@@ -17,14 +17,21 @@ const fieldInput =
 export default function ContactForm() {
   const searchParams = useSearchParams();
   const etapaParam = searchParams.get("etapa");
-  const defaultEtapa =
+  const normalizedEtapa =
     etapaParam === "construido"
       ? "construido"
       : etapaParam === "desde-cero"
         ? "desde-cero"
         : "";
 
+  const [etapa, setEtapa] = useState(normalizedEtapa);
   const [sent, setSent] = useState(false);
+
+  // Sincroniza el select cuando se navega con ?etapa= sin recargar
+  // (botones de ruta de la propia página de contacto).
+  useEffect(() => {
+    if (normalizedEtapa) setEtapa(normalizedEtapa);
+  }, [normalizedEtapa]);
 
   if (sent) {
     return (
@@ -98,7 +105,8 @@ export default function ContactForm() {
           id="etapa"
           name="etapa"
           required
-          defaultValue={defaultEtapa}
+          value={etapa}
+          onChange={(e) => setEtapa(e.target.value)}
           className={`${fieldInput} appearance-none`}
         >
           <option value="" disabled>
