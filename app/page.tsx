@@ -89,14 +89,6 @@ export default function HomePage() {
               Desarrollamos, transformamos y posicionamos proyectos
               inmobiliarios con estrategia, diseño y visión de largo plazo.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Button href="/proyecto-desde-cero" variant="earth">
-                Desarrollar un proyecto desde 0
-              </Button>
-              <Button href="/proyecto-ya-construido" variant="outline-light">
-                Optimizar una propiedad existente
-              </Button>
-            </div>
           </div>
         </div>
         <a

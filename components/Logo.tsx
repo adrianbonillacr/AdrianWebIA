@@ -25,14 +25,15 @@ export default function Logo({
   const textColor = color === "white" ? "text-white" : "text-ink";
 
   return (
-    <span className={`inline-flex flex-col ${className ?? ""}`}>
+    // items-start evita que flex estire el ícono al ancho del texto inferior
+    <span className={`inline-flex flex-col items-start ${className ?? ""}`}>
       <span className="sr-only">19.89 Arquitectura</span>
       <Image
         src={src}
         alt=""
         width={325}
         height={381}
-        className={iconClassName ?? "h-9 w-auto"}
+        className={`self-start object-contain ${iconClassName ?? "h-9 w-auto"}`}
       />
       {variant === "full" && (
         <span
