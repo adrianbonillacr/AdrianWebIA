@@ -86,32 +86,36 @@ export default async function ProjectPage({ params }: { params: Params }) {
         </div>
       </section>
 
-      {/* Navegación anterior / siguiente */}
+      {/* Navegación anterior / siguiente — hover tipográfico, sin bloques de fondo */}
       <nav aria-label="Otros proyectos" className="border-t border-stone/40 bg-white">
         <div className="container-site grid grid-cols-2">
           <Link
             href={`/portafolio/${prev.slug}`}
-            className="group border-r border-stone/40 py-10 pr-6 transition-colors duration-300 hover:bg-mist/40"
+            className="group flex flex-col justify-center border-r border-stone/40 py-12 pr-6"
           >
-            <span className="flex items-center gap-3 text-[0.68rem] font-normal uppercase tracking-[0.24em] text-earth">
+            <span className="flex items-center gap-3 text-[0.68rem] font-normal uppercase tracking-[0.24em] text-stone transition-colors duration-300 group-hover:text-earth">
               <span aria-hidden="true" className="transition-transform duration-300 group-hover:-translate-x-1.5">
                 ←
               </span>
               Anterior
             </span>
-            <span className="mt-3 block text-lg font-medium text-ink">{prev.name}</span>
+            <span className="mt-3 block text-lg font-medium text-ink transition-colors duration-300 group-hover:text-earth">
+              {prev.name}
+            </span>
           </Link>
           <Link
             href={`/portafolio/${next.slug}`}
-            className="group py-10 pl-6 text-right transition-colors duration-300 hover:bg-mist/40"
+            className="group flex flex-col items-end justify-center py-12 pl-6 text-right"
           >
-            <span className="flex items-center justify-end gap-3 text-[0.68rem] font-normal uppercase tracking-[0.24em] text-earth">
+            <span className="flex items-center gap-3 text-[0.68rem] font-normal uppercase tracking-[0.24em] text-stone transition-colors duration-300 group-hover:text-earth">
               Siguiente
               <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1.5">
                 →
               </span>
             </span>
-            <span className="mt-3 block text-lg font-medium text-ink">{next.name}</span>
+            <span className="mt-3 block text-lg font-medium text-ink transition-colors duration-300 group-hover:text-earth">
+              {next.name}
+            </span>
           </Link>
         </div>
       </nav>

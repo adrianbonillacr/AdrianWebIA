@@ -83,6 +83,55 @@
   display: none;
 }
 
+/* Cursor de marca: punto + aro con mix-blend-difference (visible sobre
+   cualquier fondo). Solo se activa con puntero fino y sin reduced-motion
+   (la clase has-custom-cursor la agrega el componente CustomCursor). */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: -100px;
+  left: -100px;
+  z-index: 90;
+  pointer-events: none;
+  border-radius: 50%;
+  translate: -50% -50%;
+  mix-blend-mode: difference;
+  opacity: 0;
+}
+
+.cursor-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #ffffff;
+  transition: opacity 0.25s ease;
+}
+
+.cursor-ring {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #ffffff;
+  transform: scale(0.4);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* Con el cursor de marca activo se oculta la flecha nativa,
+   excepto en campos de texto (ahí manda la usabilidad). */
+.has-custom-cursor body,
+.has-custom-cursor a,
+.has-custom-cursor button,
+.has-custom-cursor [role="button"],
+.has-custom-cursor select,
+.has-custom-cursor label {
+  cursor: none;
+}
+
+.has-custom-cursor input,
+.has-custom-cursor textarea {
+  cursor: text;
+}
+
 /* Reveal al entrar en viewport (una sola vez).
    Solo se oculta el contenido si hay JS (html.js) y el usuario no pidió
    reducir el movimiento — sin JS o con reduced-motion todo es visible. */
