@@ -117,7 +117,6 @@ export default async function ProjectPage({ params }: { params: Params }) {
       </nav>
 
       <CtaBanner
-        texture="madera"
         title={
           <>
             Una propiedad puede construirse en meses.{" "}

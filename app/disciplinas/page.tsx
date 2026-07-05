@@ -76,7 +76,6 @@ export default function DisciplinasPage() {
       </section>
 
       <CtaBanner
-        texture="madera"
         title={
           <>
             Descubrimos el potencial.{" "}

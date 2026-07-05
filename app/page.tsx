@@ -68,7 +68,12 @@ export default function HomePage() {
       <section className="relative flex min-h-svh items-center bg-ink text-white">
         <div className="container-site grid items-center gap-14 py-32 lg:grid-cols-[1fr_1.15fr] lg:gap-24">
           <div className="lg:border-r lg:border-stone/25 lg:pr-16">
-            <Logo variant="full" className="text-[clamp(3rem,8vw,5.5rem)]" />
+            <Logo
+              variant="full"
+              color="white"
+              iconClassName="h-[clamp(9rem,16vw,11.5rem)] w-auto"
+              className="text-[clamp(0.95rem,1.8vw,1.3rem)]"
+            />
           </div>
           <div>
             <div className="flex items-center gap-4">
@@ -165,18 +170,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ESTRATEGIA 19.89 */}
-      <section className="relative overflow-hidden bg-charcoal text-white">
-        <div className="absolute inset-0" aria-hidden="true">
-          <BrandImage
-            src={siteImages.texturas.concreto}
-            alt=""
-            tone="charcoal"
-            className="h-full w-full"
-          />
-          <div className="absolute inset-0 bg-ink/75" />
-        </div>
-        <div className="container-site section-pad relative">
+      {/* ESTRATEGIA 19.89 — fondo sólido charcoal, sin fotografías */}
+      <section className="bg-charcoal text-white">
+        <div className="container-site section-pad">
           <Reveal className="mx-auto max-w-3xl text-center">
             <SectionHeader
               eyebrow="Estrategia 19.89"
@@ -305,7 +301,6 @@ export default function HomePage() {
 
       {/* CIERRE */}
       <CtaBanner
-        texture="madera"
         title={
           <>
             Descubrimos el potencial.{" "}

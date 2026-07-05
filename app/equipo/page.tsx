@@ -62,7 +62,6 @@ export default function EquipoPage() {
       </section>
 
       <CtaBanner
-        texture="madera"
         title={
           <>
             Descubrimos el potencial.{" "}

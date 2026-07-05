@@ -46,7 +46,7 @@ Otros contenidos pendientes del cliente:
 - Nombres y roles del equipo → `/lib/team.ts`
 - Descripciones de proyectos (solo Tree Lodge tiene texto real) → `/lib/projects.ts` (campo `excerpt`)
 - Logo oficial en SVG → reemplazar el interior de `/components/Logo.tsx`
-- Envío real del formulario → `/components/ContactForm.tsx` (`TODO: conectar a Resend / API route`)
+- Formulario de contacto → envía correos reales vía [FormSubmit](https://formsubmit.co) a `siteConfig.email`. **El primer envío desde el sitio publicado dispara un correo de activación a esa bandeja: hay que abrirlo y confirmar una única vez.** Para control total a futuro, migrar a Resend (`TODO` en `/components/ContactForm.tsx`)
 
 ## Swap de Poppins a Gilroy (cuando exista la licencia)
 

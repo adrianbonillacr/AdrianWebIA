@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import BrandImage from "@/components/BrandImage";
 import CtaBanner from "@/components/CtaBanner";
 import Reveal from "@/components/Reveal";
 import SectionHeader from "@/components/SectionHeader";
-import { siteImages } from "@/lib/images";
 import { strategyPrinciples } from "@/lib/strategy";
 import { siteConfig } from "@/lib/site-config";
 
@@ -17,19 +15,9 @@ export const metadata: Metadata = {
 export default function EstrategiaPage() {
   return (
     <>
-      {/* HERO */}
-      <section className="relative flex min-h-[75vh] items-center overflow-hidden bg-ink text-white">
-        <div className="absolute inset-0" aria-hidden="true">
-          <BrandImage
-            src={siteImages.texturas.concreto}
-            alt=""
-            tone="charcoal"
-            className="h-full w-full"
-            priority
-          />
-          <div className="absolute inset-0 bg-ink/70" />
-        </div>
-        <div className="container-site relative pb-20 pt-40">
+      {/* HERO — negro sólido, sin fotografías */}
+      <section className="relative flex min-h-[70vh] items-center bg-ink text-white">
+        <div className="container-site pb-20 pt-40">
           <div className="flex items-center gap-4">
             <span aria-hidden="true" className="h-[0.4rem] w-[0.4rem] rounded-full bg-stone" />
             <p className="text-[0.72rem] font-medium uppercase tracking-[0.28em] text-stone">
@@ -149,7 +137,6 @@ export default function EstrategiaPage() {
 
       {/* CTA FINAL */}
       <CtaBanner
-        texture="madera"
         title={
           <>
             Descubrimos el potencial.{" "}

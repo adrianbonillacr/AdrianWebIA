@@ -1,29 +1,25 @@
 /**
  * Mapa de imágenes del sitio.
  *
- * Las fotos actuales provienen de la carpeta "Insumos - Assets" (selección
- * inicial optimizada a JPG ≤2560px). Para reemplazar cualquier imagen basta
- * con sobrescribir el archivo en /public respetando el nombre.
- * Si un archivo no existe, el sitio muestra un placeholder tonal de marca.
+ * Las fotos provienen de la carpeta "Insumos - Assets" (selección optimizada
+ * a JPG ≤2560px). Para reemplazar cualquier imagen basta con sobrescribir el
+ * archivo en /public respetando el nombre. Si un archivo no existe, el sitio
+ * muestra un placeholder de color sólido de marca.
+ *
+ * Los encabezados (heros) y banners no llevan fotografía: son colores sólidos.
  */
 
 export type ImageTone = "earth" | "stone" | "mist" | "charcoal" | "ink";
 
 export const siteImages = {
+  // Imágenes de las dos cards principales del home ("Dos caminos")
   hero: {
-    home: "/images/hero/home.jpg", // Tree Lodge — piscina al atardecer
-    desdeCero: "/images/hero/proyecto-desde-cero.jpg", // obra en estructura (B/N)
-    yaConstruido: "/images/hero/proyecto-ya-construido.jpg", // Kahwi — fogata al atardecer
+    desdeCero: "/images/hero/proyecto-desde-cero.jpg", // Amarea — piscina y patio
+    yaConstruido: "/images/hero/proyecto-ya-construido.jpg", // Kahwi — pabellón social (foto real)
   },
-  texturas: {
-    // Fondos de secciones oscuras y banners (se muestran con overlay ink)
-    concreto: "/images/texturas/concreto.jpg", // Amarea — patio de piedra
-    madera: "/images/texturas/madera.jpg", // Tree Lodge — portón de madera
-    travertino: "/images/texturas/travertino.jpg", // Diciembre Seis — fachada
-  },
-  servicios: {
-    asesoria: "/images/servicios/asesoria.jpg", // bitácora / asesoría (B/N)
-    estudio: "/images/servicios/estudio.jpg", // estudio / dirección (B/N)
+  logo: {
+    white: "/images/logo/icono-white.png",
+    ink: "/images/logo/icono-ink.png",
   },
 };
 

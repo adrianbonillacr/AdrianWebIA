@@ -1,39 +1,47 @@
-// TODO: reemplazar por SVG oficial cuando el cliente lo entregue.
-// El logo hereda currentColor: colocarlo siempre sobre fondos de la paleta
-// (blanco sobre ink/charcoal/earth; ink sobre white/mist). Nunca aplicar
-// sombras, rotaciones ni colores fuera de marca.
+import Image from "next/image";
+
+/**
+ * Logo oficial 19.89 (ícono "19° / 89°" entregado por el cliente, recoloreado
+ * a los tonos de la paleta: /public/images/logo/icono-white.png e icono-ink.png).
+ * Nunca aplicar sombras, rotaciones ni colores fuera de marca.
+ */
 
 type LogoProps = {
   variant?: "full" | "mark";
+  color?: "white" | "ink";
   className?: string;
+  /** Controla el alto del ícono (Tailwind), ej. "h-9 w-auto". */
+  iconClassName?: string;
 };
 
-function DegreeDot() {
-  return (
-    <span
-      aria-hidden="true"
-      className="relative -top-[0.52em] mx-[0.08em] inline-block h-[0.13em] w-[0.13em] rounded-full bg-current"
-    />
-  );
-}
+export default function Logo({
+  variant = "mark",
+  color = "ink",
+  className,
+  iconClassName,
+}: LogoProps) {
+  const src =
+    color === "white" ? "/images/logo/icono-white.png" : "/images/logo/icono-ink.png";
+  const textColor = color === "white" ? "text-white" : "text-ink";
 
-export default function Logo({ variant = "mark", className }: LogoProps) {
   return (
-    <span className={`inline-block leading-none ${className ?? ""}`}>
+    <span className={`inline-flex flex-col ${className ?? ""}`}>
       <span className="sr-only">19.89 Arquitectura</span>
-      <span aria-hidden="true" className="block">
-        <span className="text-[1.45em] font-medium tracking-[0.06em]">
-          19
-          <DegreeDot />
-          89
-          <DegreeDot />
+      <Image
+        src={src}
+        alt=""
+        width={325}
+        height={381}
+        className={iconClassName ?? "h-9 w-auto"}
+      />
+      {variant === "full" && (
+        <span
+          aria-hidden="true"
+          className={`mt-5 block text-[0.78em] font-light tracking-[0.52em] ${textColor}`}
+        >
+          ARQUITECTURA
         </span>
-        {variant === "full" && (
-          <span className="mt-[0.55em] block text-[0.62em] font-light tracking-[0.52em]">
-            ARQUITECTURA
-          </span>
-        )}
-      </span>
+      )}
     </span>
   );
 }

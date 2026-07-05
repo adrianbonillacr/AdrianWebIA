@@ -114,7 +114,7 @@ export default function Navbar() {
           className="transition-opacity duration-300 hover:opacity-70"
           aria-label="19.89 Arquitectura — Inicio"
         >
-          <Logo variant="mark" className="text-[1.05rem]" />
+          <Logo variant="mark" color={solid ? "ink" : "white"} iconClassName="h-9 w-auto" />
         </Link>
 
         {/* Navegación de escritorio */}
@@ -176,7 +176,7 @@ export default function Navbar() {
           className="fixed inset-0 z-50 flex h-dvh flex-col bg-ink text-white"
         >
           <div className="container-site flex h-20 items-center justify-between">
-            <Logo variant="mark" className="text-[1.05rem]" />
+            <Logo variant="mark" color="white" iconClassName="h-9 w-auto" />
             <button
               type="button"
               onClick={closeMenu}

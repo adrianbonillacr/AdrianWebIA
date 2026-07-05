@@ -4,7 +4,6 @@ import CtaBanner from "@/components/CtaBanner";
 import InteriorHero from "@/components/InteriorHero";
 import Reveal from "@/components/Reveal";
 import SectionHeader from "@/components/SectionHeader";
-import { siteImages } from "@/lib/images";
 import {
   analysisToAction,
   assetSelection,
@@ -71,8 +70,6 @@ export default function ProyectoDesdeCeroPage() {
         eyebrow="Proyecto desde 0"
         title="La mejor inversión comienza con la propiedad correcta."
         subtitle="Un camino estratégico para iniciar proyectos inmobiliarios con claridad, criterio y visión de largo plazo."
-        image={siteImages.hero.desdeCero}
-        tone="earth"
       />
 
       {/* INTRO */}
@@ -422,7 +419,6 @@ export default function ProyectoDesdeCeroPage() {
 
       {/* CTA FINAL */}
       <CtaBanner
-        texture="travertino"
         title="La mejor inversión comienza con la propiedad correcta."
         buttonLabel="Quiero desarrollar un proyecto desde 0"
         buttonHref="/contacto?etapa=desde-cero"

@@ -12,7 +12,7 @@ export default function Footer() {
     <footer className="bg-ink text-white">
       <div className="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4 lg:py-20">
         <div>
-          <Logo variant="full" className="text-[1.1rem]" />
+          <Logo variant="full" color="white" iconClassName="h-16 w-auto" className="text-[0.8rem]" />
           <p className="mt-6 max-w-[26ch] text-sm font-light leading-relaxed text-stone">
             {siteConfig.descriptor}
           </p>

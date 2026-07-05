@@ -11,10 +11,15 @@ const fieldInput =
   "mt-2 w-full border-b border-stone bg-transparent px-0 py-3 font-light text-ink transition-colors duration-300 placeholder:text-stone focus:border-earth focus:outline-none";
 
 /**
- * Formulario de contacto. El envío abre el cliente de correo del visitante
- * (mailto a siteConfig.email) con el mensaje ya redactado.
- * TODO: conectar a Resend / API route (POST a /api/contacto) para envío
- * directo sin depender del cliente de correo del visitante.
+ * Formulario de contacto con envío real de correo vía FormSubmit
+ * (https://formsubmit.co — gratuito, sin backend propio).
+ *
+ * IMPORTANTE: el PRIMER envío dispara un correo de activación a
+ * siteConfig.email; hay que abrir ese correo y confirmar una única vez.
+ * A partir de ahí, cada mensaje del formulario llega directo a la bandeja.
+ *
+ * TODO: si más adelante se quiere control total (plantillas, dominio propio),
+ * migrar a Resend con una API route.
  */
 export default function ContactForm() {
   const searchParams = useSearchParams();
@@ -27,7 +32,9 @@ export default function ContactForm() {
         : "";
 
   const [etapa, setEtapa] = useState(normalizedEtapa);
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
 
   // Sincroniza el select cuando se navega con ?etapa= sin recargar
   // (botones de ruta de la propia página de contacto).
@@ -35,21 +42,14 @@ export default function ContactForm() {
     if (normalizedEtapa) setEtapa(normalizedEtapa);
   }, [normalizedEtapa]);
 
-  if (sent) {
+  if (status === "sent") {
     return (
       <div className="border border-stone/40 p-10" role="status">
         <p className="text-[0.72rem] font-medium uppercase tracking-[0.28em] text-earth">
-          Mensaje listo
+          Mensaje enviado
         </p>
         <p className="mt-4 text-lg font-light leading-[1.7] text-ink">
-          Se abrió tu aplicación de correo con el mensaje listo para enviar.
-        </p>
-        <p className="mt-3 max-w-[48ch] text-sm font-light leading-[1.7] text-charcoal">
-          Si no se abrió automáticamente, escribinos directo a{" "}
-          <a href={`mailto:${siteConfig.email}`} className="text-earth underline underline-offset-4">
-            {siteConfig.email}
-          </a>{" "}
-          o por WhatsApp.
+          Mensaje enviado. Te contactamos pronto.
         </p>
       </div>
     );
@@ -57,25 +57,39 @@ export default function ContactForm() {
 
   return (
     <form
-      noValidate={false}
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
         const data = new FormData(e.currentTarget);
         const etapaLabel =
           data.get("etapa") === "construido"
             ? "Ya tengo un proyecto construido"
             : "Quiero iniciar desde 0";
-        const subject = `Consulta de proyecto — ${data.get("nombre")}`;
-        const body = [
-          `Nombre: ${data.get("nombre")}`,
-          `Correo: ${data.get("correo")}`,
-          `Teléfono: ${data.get("telefono") || "—"}`,
-          `Etapa del proyecto: ${etapaLabel}`,
-          "",
-          String(data.get("mensaje") ?? ""),
-        ].join("\n");
-        window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        setSent(true);
+        setStatus("sending");
+        try {
+          const res = await fetch(
+            `https://formsubmit.co/ajax/${siteConfig.email}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: JSON.stringify({
+                Nombre: data.get("nombre"),
+                Correo: data.get("correo"),
+                Teléfono: data.get("telefono") || "—",
+                "Etapa del proyecto": etapaLabel,
+                Mensaje: data.get("mensaje"),
+                _subject: `Consulta de proyecto — ${data.get("nombre")}`,
+                _template: "table",
+                _captcha: "false",
+              }),
+            },
+          );
+          setStatus(res.ok ? "sent" : "error");
+        } catch {
+          setStatus("error");
+        }
       }}
       className="space-y-9"
     >
@@ -154,9 +168,23 @@ export default function ContactForm() {
         />
       </div>
 
-      <button type="submit" className={buttonClasses("earth")}>
-        Enviar mensaje
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className={`${buttonClasses("earth")} disabled:opacity-60`}
+      >
+        {status === "sending" ? "Enviando…" : "Enviar mensaje"}
       </button>
+
+      {status === "error" && (
+        <p role="alert" className="text-sm font-normal text-earth">
+          No pudimos enviar el mensaje. Intentá de nuevo o escribinos directo a{" "}
+          <a href={`mailto:${siteConfig.email}`} className="underline underline-offset-4">
+            {siteConfig.email}
+          </a>{" "}
+          o por WhatsApp.
+        </p>
+      )}
     </form>
   );
 }

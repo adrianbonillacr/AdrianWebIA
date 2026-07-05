@@ -4,7 +4,6 @@ import CtaBanner from "@/components/CtaBanner";
 import InteriorHero from "@/components/InteriorHero";
 import Reveal from "@/components/Reveal";
 import SectionHeader from "@/components/SectionHeader";
-import { siteImages } from "@/lib/images";
 import { valueIndexDimensions } from "@/lib/process-steps";
 import { analysisToAction } from "@/lib/services";
 
@@ -52,8 +51,6 @@ export default function ProyectoYaConstruidoPage() {
         eyebrow="Proyecto ya construido"
         title="Medimos primero. Invertimos después."
         subtitle="Una consultoría estratégica para comprender el estado actual de una propiedad, identificar oportunidades de mejora y orientar futuras decisiones de inversión."
-        image={siteImages.hero.yaConstruido}
-        tone="charcoal"
       />
 
       {/* INTRO */}
@@ -211,7 +208,6 @@ export default function ProyectoYaConstruidoPage() {
 
       {/* CTA FINAL */}
       <CtaBanner
-        texture="concreto"
         title={
           <>
             Medimos primero.{" "}
