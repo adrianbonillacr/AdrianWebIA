@@ -35,7 +35,7 @@ export default function ProjectCard({
         className={aspect}
         sizes={sizes ?? "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
       />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 to-transparent px-6 pb-5 pt-16">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-ink/75 px-6 py-4">
         <p className="text-base font-medium text-white">{project.name}</p>
         <p className="mt-1 text-[0.66rem] font-normal uppercase tracking-[0.24em] text-mist">
           {categoryLabel(project)}

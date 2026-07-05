@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ArrowLink from "@/components/ArrowLink";
+import Link from "next/link";
 import CtaBanner from "@/components/CtaBanner";
 import InteriorHero from "@/components/InteriorHero";
 import Reveal from "@/components/Reveal";
@@ -151,24 +151,31 @@ export default function ProyectoDesdeCeroPage() {
               </article>
             </Reveal>
 
-            {/* Card B · Diagnóstico estratégico */}
+            {/* Card B · Diagnóstico estratégico — toda la card es clicable */}
             <Reveal delay={120}>
-              <article className="flex h-full flex-col border border-stone/40 bg-mist/40 p-8 lg:p-10">
+              <Link
+                href="/proyecto-ya-construido"
+                className="group flex h-full flex-col border border-stone/40 bg-mist/40 p-8 transition-colors duration-300 hover:bg-mist/70 lg:p-10"
+              >
                 <p className="text-[0.66rem] font-medium uppercase tracking-[0.26em] text-stone">
                   {strategicDiagnosis.option}
                 </p>
-                <h3 className="mt-4 text-2xl font-semibold text-ink">
+                <h3 className="mt-4 text-2xl font-semibold text-ink transition-colors duration-300 group-hover:text-earth">
                   {strategicDiagnosis.title}
                 </h3>
                 <p className="mt-4 max-w-[52ch] font-light leading-[1.7] text-charcoal">
                   {strategicDiagnosis.description}
                 </p>
-                <div className="mt-auto pt-8">
-                  <ArrowLink href="/proyecto-ya-construido">
-                    Ver diagnóstico estratégico
-                  </ArrowLink>
-                </div>
-              </article>
+                <span className="mt-auto inline-flex items-center gap-3 pt-8 text-[0.8rem] font-normal uppercase tracking-[0.14em] text-earth">
+                  Ver diagnóstico estratégico
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform duration-300 group-hover:translate-x-1.5"
+                  >
+                    →
+                  </span>
+                </span>
+              </Link>
             </Reveal>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ArrowLink from "@/components/ArrowLink";
+import Link from "next/link";
 import BrandImage from "@/components/BrandImage";
 import CtaBanner from "@/components/CtaBanner";
 import Reveal from "@/components/Reveal";
@@ -97,36 +97,51 @@ export default function EstrategiaPage() {
           </Reveal>
           <div className="mt-12 grid gap-px border border-stone/40 bg-stone/40 md:grid-cols-2">
             <Reveal className="h-full">
-              <div className="flex h-full flex-col bg-white p-8 lg:p-10">
+              {/* Toda la card es clicable */}
+              <Link
+                href="/proyecto-desde-cero"
+                className="group flex h-full flex-col bg-white p-8 transition-colors duration-300 hover:bg-mist/50 lg:p-10"
+              >
                 <p className="text-[0.66rem] font-medium uppercase tracking-[0.26em] text-stone">
                   Camino 01
                 </p>
-                <h3 className="mt-3 text-xl font-semibold text-ink">Proyecto desde 0</h3>
+                <h3 className="mt-3 text-xl font-semibold text-ink transition-colors duration-300 group-hover:text-earth">
+                  Proyecto desde 0
+                </h3>
                 <p className="mt-3 max-w-[46ch] font-light leading-[1.7] text-charcoal">
                   Desde la selección del activo hasta el posicionamiento:
                   claridad antes de cada decisión de inversión.
                 </p>
-                <div className="mt-auto pt-6">
-                  <ArrowLink href="/proyecto-desde-cero">Ver proceso</ArrowLink>
-                </div>
-              </div>
+                <span className="mt-auto inline-flex items-center gap-3 pt-6 text-[0.8rem] font-normal uppercase tracking-[0.14em] text-earth">
+                  Ver proceso
+                  <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1.5">
+                    →
+                  </span>
+                </span>
+              </Link>
             </Reveal>
             <Reveal className="h-full" delay={120}>
-              <div className="flex h-full flex-col bg-white p-8 lg:p-10">
+              <Link
+                href="/proyecto-ya-construido"
+                className="group flex h-full flex-col bg-white p-8 transition-colors duration-300 hover:bg-mist/50 lg:p-10"
+              >
                 <p className="text-[0.66rem] font-medium uppercase tracking-[0.26em] text-stone">
                   Camino 02
                 </p>
-                <h3 className="mt-3 text-xl font-semibold text-ink">
+                <h3 className="mt-3 text-xl font-semibold text-ink transition-colors duration-300 group-hover:text-earth">
                   Proyecto ya construido
                 </h3>
                 <p className="mt-3 max-w-[46ch] font-light leading-[1.7] text-charcoal">
                   Diagnóstico Estratégico, Índice de Valor 19.89 y una hoja de
                   ruta que ordena las prioridades de inversión.
                 </p>
-                <div className="mt-auto pt-6">
-                  <ArrowLink href="/proyecto-ya-construido">Ver diagnóstico</ArrowLink>
-                </div>
-              </div>
+                <span className="mt-auto inline-flex items-center gap-3 pt-6 text-[0.8rem] font-normal uppercase tracking-[0.14em] text-earth">
+                  Ver diagnóstico
+                  <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1.5">
+                    →
+                  </span>
+                </span>
+              </Link>
             </Reveal>
           </div>
         </div>

@@ -24,30 +24,14 @@ type BrandImageProps = {
   hoverZoom?: boolean;
 };
 
-// Solo colores oficiales de la paleta en los gradientes tonales.
-const toneStyles: Record<ImageTone, { gradient: string; labelClass: string }> =
-  {
-    earth: {
-      gradient: "linear-gradient(145deg, #6f6252 0%, #5c5144 55%, #2e2e2e 100%)",
-      labelClass: "text-mist",
-    },
-    stone: {
-      gradient: "linear-gradient(145deg, #a3a093 0%, #a3a093 40%, #6f6252 100%)",
-      labelClass: "text-white",
-    },
-    mist: {
-      gradient: "linear-gradient(145deg, #ffffff 0%, #d1cfcb 55%, #a3a093 100%)",
-      labelClass: "text-ink",
-    },
-    charcoal: {
-      gradient: "linear-gradient(145deg, #2e2e2e 0%, #2e2e2e 45%, #161616 100%)",
-      labelClass: "text-stone",
-    },
-    ink: {
-      gradient: "linear-gradient(145deg, #2e2e2e 0%, #161616 60%, #161616 100%)",
-      labelClass: "text-stone",
-    },
-  };
+// Colores sólidos de la paleta oficial (sin degradados, según libro de marca).
+const toneStyles: Record<ImageTone, { color: string; labelClass: string }> = {
+  earth: { color: "#6f6252", labelClass: "text-mist" },
+  stone: { color: "#a3a093", labelClass: "text-white" },
+  mist: { color: "#d1cfcb", labelClass: "text-ink" },
+  charcoal: { color: "#2e2e2e", labelClass: "text-stone" },
+  ink: { color: "#161616", labelClass: "text-stone" },
+};
 
 function imageExists(src: string): boolean {
   try {
@@ -89,7 +73,7 @@ export default function BrandImage({
           aria-label={alt || undefined}
           aria-hidden={alt ? undefined : true}
           className={`absolute inset-0${zoomClass}`}
-          style={{ backgroundImage: toneStyles[tone].gradient }}
+          style={{ backgroundColor: toneStyles[tone].color }}
         >
           <div aria-hidden="true" className="texture-grain absolute inset-0" />
           {label ? (

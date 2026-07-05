@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ArrowLink from "@/components/ArrowLink";
+import Logo from "@/components/Logo";
 import BrandImage from "@/components/BrandImage";
 import Button from "@/components/Button";
 import CtaBanner from "@/components/CtaBanner";
@@ -62,46 +64,34 @@ function PortfolioLabel({ label }: { label: string }) {
 export default function HomePage() {
   return (
     <>
-      {/* HERO */}
-      <section className="relative flex min-h-svh items-center overflow-hidden bg-ink text-white">
-        <div className="absolute inset-0" aria-hidden="true">
-          <BrandImage
-            src={siteImages.hero.home}
-            alt=""
-            tone="earth"
-            className="h-full w-full"
-            priority
-          />
-          <div className="absolute inset-0 bg-ink/55" />
-        </div>
-        <div className="container-site relative py-32">
-          <div className="flex items-center gap-4">
-            <span aria-hidden="true" className="h-[0.4rem] w-[0.4rem] rounded-full bg-mist" />
-            <p className="text-[0.72rem] font-medium uppercase tracking-[0.28em] text-mist">
-              19.89 Arquitectura — Costa Rica
-            </p>
+      {/* HERO — negro sólido, logo grande a la izquierda, información mínima */}
+      <section className="relative flex min-h-svh items-center bg-ink text-white">
+        <div className="container-site grid items-center gap-14 py-32 lg:grid-cols-[1fr_1.15fr] lg:gap-24">
+          <div className="lg:border-r lg:border-stone/25 lg:pr-16">
+            <Logo variant="full" className="text-[clamp(3rem,8vw,5.5rem)]" />
           </div>
-          <h1 className="mt-8 max-w-[16ch] text-[clamp(2.6rem,6.4vw,4.6rem)] font-semibold leading-[1.08]">
-            Arquitectura e inversión con valor.
-          </h1>
-          <p className="mt-7 max-w-[52ch] text-base font-light leading-[1.7] text-mist md:text-lg">
-            Desarrollamos, transformamos y posicionamos proyectos inmobiliarios
-            con estrategia, diseño y visión de largo plazo.
-          </p>
-          <p className="mt-6 max-w-[62ch] border-l border-stone/40 pl-5 text-[0.9rem] font-light leading-[1.8] text-mist/90">
-            19.89 Arquitectura es una firma especializada en el desarrollo
-            estratégico de proyectos inmobiliarios en Costa Rica. A través de
-            la Estrategia 19.89, analizamos, planificamos, diseñamos y
-            posicionamos proyectos para convertir propiedades en activos con
-            identidad, diferenciación y valor a largo plazo.
-          </p>
-          <div className="mt-11 flex flex-wrap gap-4">
-            <Button href="/proyecto-desde-cero" variant="earth">
-              Quiero desarrollar un proyecto desde 0
-            </Button>
-            <Button href="/proyecto-ya-construido" variant="outline-light">
-              Quiero optimizar una propiedad existente
-            </Button>
+          <div>
+            <div className="flex items-center gap-4">
+              <span aria-hidden="true" className="h-[0.4rem] w-[0.4rem] rounded-full bg-mist" />
+              <p className="text-[0.72rem] font-medium uppercase tracking-[0.28em] text-mist">
+                Estudio de arquitectura — Costa Rica
+              </p>
+            </div>
+            <h1 className="mt-8 max-w-[16ch] text-[clamp(2.2rem,4.6vw,3.6rem)] font-semibold leading-[1.1]">
+              Arquitectura e inversión con valor.
+            </h1>
+            <p className="mt-6 max-w-[46ch] text-base font-light leading-[1.7] text-mist md:text-lg">
+              Desarrollamos, transformamos y posicionamos proyectos
+              inmobiliarios con estrategia, diseño y visión de largo plazo.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Button href="/proyecto-desde-cero" variant="earth">
+                Desarrollar un proyecto desde 0
+              </Button>
+              <Button href="/proyecto-ya-construido" variant="outline-light">
+                Optimizar una propiedad existente
+              </Button>
+            </div>
           </div>
         </div>
         <a
@@ -134,30 +124,41 @@ export default function HomePage() {
           <div className="mt-16 grid gap-12 md:grid-cols-2 md:gap-10">
             {paths.map((path, i) => (
               <Reveal key={path.href} delay={i * 120}>
-                <article className="group">
-                  <div className="relative overflow-hidden">
-                    <BrandImage
-                      src={path.image}
-                      alt={`${path.title} — 19.89 Arquitectura`}
-                      tone={path.tone}
-                      label={path.title}
-                      hoverZoom
-                      className="aspect-[4/3]"
-                      sizes="(min-width: 768px) 50vw, 100vw"
-                    />
-                    <span className="absolute left-5 top-5 border border-white/60 px-3 py-1.5 text-[0.62rem] font-normal uppercase tracking-[0.28em] text-white">
-                      {path.tag}
+                {/* Toda la card (imagen + texto) es el área clicable */}
+                <Link href={path.href} className="group block">
+                  <article>
+                    <div className="relative overflow-hidden">
+                      <BrandImage
+                        src={path.image}
+                        alt={`${path.title} — 19.89 Arquitectura`}
+                        tone={path.tone}
+                        label={path.title}
+                        hoverZoom
+                        className="aspect-[4/3]"
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                      />
+                      <span className="absolute left-5 top-5 border border-white/60 px-3 py-1.5 text-[0.62rem] font-normal uppercase tracking-[0.28em] text-white">
+                        {path.tag}
+                      </span>
+                    </div>
+                    <h3 className="mt-8 text-2xl font-semibold text-ink transition-colors duration-300 group-hover:text-earth">
+                      {path.title}
+                    </h3>
+                    <p className="mt-3 font-normal italic text-earth">{path.tagline}</p>
+                    <p className="mt-4 max-w-[54ch] font-light leading-[1.7] text-charcoal">
+                      {path.description}
+                    </p>
+                    <span className="mt-6 inline-flex items-center gap-3 text-[0.8rem] font-normal uppercase tracking-[0.14em] text-earth">
+                      {path.linkLabel}
+                      <span
+                        aria-hidden="true"
+                        className="transition-transform duration-300 group-hover:translate-x-1.5"
+                      >
+                        →
+                      </span>
                     </span>
-                  </div>
-                  <h3 className="mt-8 text-2xl font-semibold text-ink">{path.title}</h3>
-                  <p className="mt-3 font-normal italic text-earth">{path.tagline}</p>
-                  <p className="mt-4 max-w-[54ch] font-light leading-[1.7] text-charcoal">
-                    {path.description}
-                  </p>
-                  <ArrowLink href={path.href} className="mt-6">
-                    {path.linkLabel}
-                  </ArrowLink>
-                </article>
+                  </article>
+                </Link>
               </Reveal>
             ))}
           </div>

@@ -94,6 +94,9 @@ export default function ContactoPage() {
                   <WhatsAppIcon />
                   WhatsApp
                 </a>
+                <p className="mt-3 text-sm font-light text-charcoal">
+                  {siteConfig.whatsappDisplay}
+                </p>
 
                 <dl className="mt-10 space-y-8">
                   <div>

@@ -18,6 +18,7 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "sharp": "^0.35.3",
     "tailwindcss": "latest",
     "typescript": "latest"
   }

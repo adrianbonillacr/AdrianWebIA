@@ -3,10 +3,13 @@ export const siteConfig = {
   namePlain: "1989 Arquitectura", // para SEO y metadatos
   descriptor: "Estudio de Arquitectura — Costa Rica",
   tagline: "Arquitectura e inversión con valor",
-  whatsapp: "https://wa.me/50600000000", // TODO: reemplazar
-  email: "hola@1989arquitectura.com", // TODO: reemplazar
-  instagram: "https://instagram.com/19.89_arquitectura",
+  whatsapp: "https://wa.me/50670867130",
+  whatsappDisplay: "+506 7086 7130",
+  email: "adrianbonillacr@hotmail.com",
+  instagram: "https://www.instagram.com/19.89_arquitectura/",
   instagramHandle: "@19.89_arquitectura",
-  calendarUrl: "#", // TODO: link de agenda (Calendly o similar)
+  // El botón "Agendar reunión" lleva a la página de contacto.
+  // TODO: si se contrata Calendly u otra agenda, poner el link aquí.
+  calendarUrl: "/contacto",
   domain: "https://1989arquitectura.com",
 };

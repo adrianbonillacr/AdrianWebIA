@@ -43,7 +43,7 @@ export default async function OgImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundImage: "linear-gradient(145deg, #2E2E2E 0%, #161616 70%)",
+          backgroundColor: "#161616",
           color: "#FFFFFF",
           fontFamily: "Poppins",
         }}

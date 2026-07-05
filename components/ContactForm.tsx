@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { buttonClasses } from "@/components/Button";
+import { siteConfig } from "@/lib/site-config";
 
 const fieldLabel =
   "block text-[0.7rem] font-medium uppercase tracking-[0.24em] text-earth";
@@ -10,9 +11,10 @@ const fieldInput =
   "mt-2 w-full border-b border-stone bg-transparent px-0 py-3 font-light text-ink transition-colors duration-300 placeholder:text-stone focus:border-earth focus:outline-none";
 
 /**
- * Formulario de contacto. Por ahora simula el envío en el cliente.
- * TODO: conectar a Resend / API route (POST a /api/contacto) cuando exista
- * la cuenta de envío transaccional.
+ * Formulario de contacto. El envío abre el cliente de correo del visitante
+ * (mailto a siteConfig.email) con el mensaje ya redactado.
+ * TODO: conectar a Resend / API route (POST a /api/contacto) para envío
+ * directo sin depender del cliente de correo del visitante.
  */
 export default function ContactForm() {
   const searchParams = useSearchParams();
@@ -37,10 +39,17 @@ export default function ContactForm() {
     return (
       <div className="border border-stone/40 p-10" role="status">
         <p className="text-[0.72rem] font-medium uppercase tracking-[0.28em] text-earth">
-          Mensaje enviado
+          Mensaje listo
         </p>
         <p className="mt-4 text-lg font-light leading-[1.7] text-ink">
-          Mensaje enviado. Te contactamos pronto.
+          Se abrió tu aplicación de correo con el mensaje listo para enviar.
+        </p>
+        <p className="mt-3 max-w-[48ch] text-sm font-light leading-[1.7] text-charcoal">
+          Si no se abrió automáticamente, escribinos directo a{" "}
+          <a href={`mailto:${siteConfig.email}`} className="text-earth underline underline-offset-4">
+            {siteConfig.email}
+          </a>{" "}
+          o por WhatsApp.
         </p>
       </div>
     );
@@ -51,6 +60,21 @@ export default function ContactForm() {
       noValidate={false}
       onSubmit={(e) => {
         e.preventDefault();
+        const data = new FormData(e.currentTarget);
+        const etapaLabel =
+          data.get("etapa") === "construido"
+            ? "Ya tengo un proyecto construido"
+            : "Quiero iniciar desde 0";
+        const subject = `Consulta de proyecto — ${data.get("nombre")}`;
+        const body = [
+          `Nombre: ${data.get("nombre")}`,
+          `Correo: ${data.get("correo")}`,
+          `Teléfono: ${data.get("telefono") || "—"}`,
+          `Etapa del proyecto: ${etapaLabel}`,
+          "",
+          String(data.get("mensaje") ?? ""),
+        ].join("\n");
+        window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         setSent(true);
       }}
       className="space-y-9"

@@ -8,8 +8,8 @@ import { siteConfig } from "@/lib/site-config";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
-  { href: "/proyecto-desde-cero", label: "Proyecto desde 0" },
-  { href: "/proyecto-ya-construido", label: "Proyecto ya construido" },
+  { href: "/proyecto-desde-cero", label: "Desde 0" },
+  { href: "/proyecto-ya-construido", label: "Ya construido" },
   { href: "/estrategia", label: "Estrategia 19.89" },
   { href: "/disciplinas", label: "Disciplinas" },
   { href: "/portafolio", label: "Portafolio" },

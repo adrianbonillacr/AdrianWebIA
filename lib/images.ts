@@ -1,56 +1,50 @@
 /**
- * Mapa de imágenes esperadas por el sitio.
+ * Mapa de imágenes del sitio.
  *
- * INSTRUCCIONES PARA EL CLIENTE:
- * - Subir cada foto a la ruta indicada dentro de /public (respetar nombre exacto).
- * - Formato: horizontal 16:9 o 4:3, mínimo 2400px de ancho (retratos del equipo: 3:4 vertical).
- * - Mientras un archivo no exista, el sitio muestra automáticamente un
- *   placeholder tonal de marca en su lugar. No hay que tocar código.
+ * Las fotos actuales provienen de la carpeta "Insumos - Assets" (selección
+ * inicial optimizada a JPG ≤2560px). Para reemplazar cualquier imagen basta
+ * con sobrescribir el archivo en /public respetando el nombre.
+ * Si un archivo no existe, el sitio muestra un placeholder tonal de marca.
  */
 
 export type ImageTone = "earth" | "stone" | "mist" | "charcoal" | "ink";
 
 export const siteImages = {
   hero: {
-    home: "/images/hero/home.jpg", // TODO: foto real — hero principal del sitio (proyecto insignia, horizontal 16:9)
-    desdeCero: "/images/hero/proyecto-desde-cero.jpg", // TODO: foto real — terreno / obra inicial
-    yaConstruido: "/images/hero/proyecto-ya-construido.jpg", // TODO: foto real — proyecto existente
+    home: "/images/hero/home.jpg", // Tree Lodge — piscina al atardecer
+    desdeCero: "/images/hero/proyecto-desde-cero.jpg", // obra en estructura (B/N)
+    yaConstruido: "/images/hero/proyecto-ya-construido.jpg", // Kahwi — fogata al atardecer
   },
   texturas: {
-    concreto: "/images/texturas/concreto.jpg", // TODO: foto real — textura de concreto (fondo sección Estrategia 19.89)
-    madera: "/images/texturas/madera.jpg", // TODO: foto real — textura de madera oscura (banners de cierre)
-    travertino: "/images/texturas/travertino.jpg", // TODO: foto real — textura de travertino (heros interiores)
+    // Fondos de secciones oscuras y banners (se muestran con overlay ink)
+    concreto: "/images/texturas/concreto.jpg", // Amarea — patio de piedra
+    madera: "/images/texturas/madera.jpg", // Tree Lodge — portón de madera
+    travertino: "/images/texturas/travertino.jpg", // Diciembre Seis — fachada
   },
   servicios: {
-    desdeCeroEtapa1: "/images/servicios/desde-cero-etapa-01.jpg", // TODO: foto real — asesoría de inversiones
-    desdeCeroEtapa2: "/images/servicios/desde-cero-etapa-02.jpg", // TODO: foto real — desarrollo del proyecto
-    desdeCeroEtapa3: "/images/servicios/desde-cero-etapa-03.jpg", // TODO: foto real — identidad y posicionamiento
-    desdeCeroEtapa4: "/images/servicios/desde-cero-etapa-04.jpg", // TODO: foto real — sostenibilidad / futuro
+    asesoria: "/images/servicios/asesoria.jpg", // bitácora / asesoría (B/N)
+    estudio: "/images/servicios/estudio.jpg", // estudio / dirección (B/N)
   },
-  equipo: [
-    "/images/equipo/retrato-01.jpg", // TODO: foto real — retrato 3:4
-    "/images/equipo/retrato-02.jpg", // TODO: foto real — retrato 3:4
-    "/images/equipo/retrato-03.jpg", // TODO: foto real — retrato 3:4
-    "/images/equipo/retrato-04.jpg", // TODO: foto real — retrato 3:4
-    "/images/equipo/retrato-05.jpg", // TODO: foto real — retrato 3:4
-    "/images/equipo/retrato-06.jpg", // TODO: foto real — retrato 3:4
-  ],
 };
 
-/**
- * Imágenes por proyecto del portafolio.
- * `cover` se usa en cards (home y grid de portafolio).
- * `gallery` son las imágenes apiladas del case-study (subir 4–6 por proyecto).
- */
+/** Cantidad de imágenes reales disponibles por galería de proyecto. */
+const projectGalleryCounts: Record<string, number> = {
+  "tree-lodge": 5,
+  cafetal: 5,
+  "diciembre-seis": 5,
+  kahwi: 5,
+  amarea: 5,
+  edica: 2,
+  "flex-center": 2,
+};
+
 export function projectImages(slug: string) {
+  const count = projectGalleryCounts[slug] ?? 5;
   return {
-    cover: `/images/proyectos/${slug}/cover.jpg`, // TODO: foto real — portada del proyecto
-    gallery: [
-      `/images/proyectos/${slug}/01.jpg`, // TODO: foto real
-      `/images/proyectos/${slug}/02.jpg`, // TODO: foto real
-      `/images/proyectos/${slug}/03.jpg`, // TODO: foto real
-      `/images/proyectos/${slug}/04.jpg`, // TODO: foto real
-      `/images/proyectos/${slug}/05.jpg`, // TODO: foto real
-    ],
+    cover: `/images/proyectos/${slug}/cover.jpg`,
+    gallery: Array.from(
+      { length: count },
+      (_, i) => `/images/proyectos/${slug}/${String(i + 1).padStart(2, "0")}.jpg`,
+    ),
   };
 }
