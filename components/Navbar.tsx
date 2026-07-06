@@ -100,6 +100,17 @@ export default function Navbar() {
 
   const textColor = solid ? "text-ink" : "text-white";
 
+  // Si el link apunta a la página actual, Next no navega: subimos al tope.
+  // (scrollTo sin "behavior" respeta scroll-behavior del CSS, que ya es
+  // smooth y se desactiva con prefers-reduced-motion.)
+  const scrollTopIfSameRoute =
+    (href: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (pathname === href) {
+        e.preventDefault();
+        window.scrollTo({ top: 0 });
+      }
+    };
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${
@@ -111,6 +122,7 @@ export default function Navbar() {
       <div className={`container-site flex h-20 items-center justify-between ${textColor}`}>
         <Link
           href="/"
+          onClick={scrollTopIfSameRoute("/")}
           className="transition-opacity duration-300 hover:opacity-70"
           aria-label="19.89 Arquitectura — Inicio"
         >
@@ -125,6 +137,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={scrollTopIfSameRoute(link.href)}
                 aria-current={active ? "page" : undefined}
                 className="group relative py-1 text-[0.66rem] font-normal uppercase tracking-[0.15em]"
               >
@@ -196,7 +209,10 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(e) => {
+                    setMenuOpen(false);
+                    scrollTopIfSameRoute(link.href)(e);
+                  }}
                   aria-current={active ? "page" : undefined}
                   className={`text-[1.2rem] font-light uppercase tracking-[0.2em] transition-colors duration-300 ${
                     active ? "text-earth" : "text-white hover:text-stone"
