@@ -30,37 +30,49 @@ export const projects: Project[] = [
     slug: "cafetal",
     name: "Cafetal",
     categories: ["arquitectura"],
-    // TODO: descripción del proyecto
+    excerpt:
+      "Residencia de volúmenes puros y acentos oscuros, donde los patios y la vegetación ordenan la experiencia del habitar.",
+    // TODO: validar descripción con el cliente
   },
   {
     slug: "diciembre-seis",
     name: "Diciembre Seis",
     categories: ["arquitectura"],
-    // TODO: descripción del proyecto
+    excerpt:
+      "Conjunto residencial de líneas horizontales y cubiertas flotantes: claridad formal, privacidad y valor de largo plazo.",
+    // TODO: validar descripción con el cliente
   },
   {
     slug: "kahwi",
     name: "Kahwi",
     categories: ["arquitectura", "iluminacion"],
-    // TODO: descripción del proyecto
+    excerpt:
+      "Hotel boutique entre árboles en Tamarindo: pabellones ligeros, materiales naturales y una atmósfera que convierte el paisaje en parte de la experiencia.",
+    // TODO: validar descripción con el cliente
   },
   {
     slug: "amarea",
     name: "Amarea",
     categories: ["arquitectura"],
-    // TODO: descripción del proyecto
+    excerpt:
+      "Villas de espíritu tropical: volúmenes blancos, madera clara y una piscina que organiza el paisaje y la vida al exterior.",
+    // TODO: validar descripción con el cliente
   },
   {
     slug: "edica",
     name: "Edica",
     categories: ["iluminacion"],
-    // TODO: descripción del proyecto
+    excerpt:
+      "Diseño de iluminación exterior: criterios lumínicos que equilibran seguridad, confort visual y atmósfera en los recorridos.",
+    // TODO: validar descripción con el cliente
   },
   {
     slug: "flex-center",
     name: "Flex Center",
     categories: ["iluminacion"],
-    // TODO: descripción del proyecto
+    excerpt:
+      "Criterios de iluminación para un conjunto comercial: eficiencia, jerarquía visual y una lectura clara de la arquitectura nocturna.",
+    // TODO: validar descripción con el cliente
   },
 ];
 
