@@ -83,6 +83,20 @@
   display: none;
 }
 
+/* Pre-pantalla del inicio: el logo aparece con un fade sutil */
+@keyframes preloader-logo-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.preloader-logo {
+  animation: preloader-logo-in 0.9s ease-out both;
+}
+
 /* Cursor de marca: punto + aro con mix-blend-difference (visible sobre
    cualquier fondo). Solo se activa con puntero fino y sin reduced-motion
    (la clase has-custom-cursor la agrega el componente CustomCursor). */

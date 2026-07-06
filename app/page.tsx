@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ArrowLink from "@/components/ArrowLink";
 import Logo from "@/components/Logo";
+import Preloader from "@/components/Preloader";
 import BrandImage from "@/components/BrandImage";
 import Button from "@/components/Button";
 import CtaBanner from "@/components/CtaBanner";
@@ -64,15 +65,17 @@ function PortfolioLabel({ label }: { label: string }) {
 export default function HomePage() {
   return (
     <>
+      {/* Pre-pantalla de 2s: fondo sólido con el logo */}
+      <Preloader />
+
       {/* HERO — negro sólido, logo grande a la izquierda, información mínima */}
       <section className="relative flex min-h-svh items-center bg-ink text-white">
         <div className="container-site grid items-center gap-14 py-32 lg:grid-cols-[1fr_1.15fr] lg:gap-24">
           <div className="lg:border-r lg:border-stone/25 lg:pr-16">
             <Logo
-              variant="full"
+              variant="mark"
               color="white"
-              iconClassName="h-[clamp(9rem,16vw,11.5rem)] w-auto"
-              className="text-[clamp(0.95rem,1.8vw,1.3rem)]"
+              iconClassName="h-[clamp(13rem,26vw,19rem)] w-auto"
             />
           </div>
           <div>

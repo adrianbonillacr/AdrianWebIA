@@ -10,13 +10,19 @@ const fieldLabel =
 const fieldInput =
   "mt-2 w-full border-b border-stone bg-transparent px-0 py-3 font-light text-ink transition-colors duration-300 placeholder:text-stone focus:border-earth focus:outline-none";
 
+const etapaLabels: Record<string, string> = {
+  "desde-cero": "Quiero iniciar desde 0",
+  construido: "Ya tengo un proyecto construido",
+};
+
 /**
- * Formulario de contacto con envío real de correo vía FormSubmit
- * (https://formsubmit.co — gratuito, sin backend propio).
+ * Formulario de contacto con envío real vía FormSubmit (POST nativo, sin
+ * backend propio). Al enviar, FormSubmit entrega el correo a siteConfig.email
+ * y redirige de vuelta a /contacto?enviado=1, donde se muestra la confirmación.
  *
- * IMPORTANTE: el PRIMER envío dispara un correo de activación a
- * siteConfig.email; hay que abrir ese correo y confirmar una única vez.
- * A partir de ahí, cada mensaje del formulario llega directo a la bandeja.
+ * IMPORTANTE (una sola vez): el PRIMER envío desde el sitio publicado dispara
+ * un correo de activación a siteConfig.email; hay que abrirlo y confirmar.
+ * A partir de ahí, cada mensaje llega directo a la bandeja.
  *
  * TODO: si más adelante se quiere control total (plantillas, dominio propio),
  * migrar a Resend con una API route.
@@ -24,17 +30,14 @@ const fieldInput =
 export default function ContactForm() {
   const searchParams = useSearchParams();
   const etapaParam = searchParams.get("etapa");
+  const enviado = searchParams.get("enviado") === "1";
   const normalizedEtapa =
-    etapaParam === "construido"
-      ? "construido"
-      : etapaParam === "desde-cero"
-        ? "desde-cero"
-        : "";
+    etapaParam && etapaLabels[etapaParam] ? etapaLabels[etapaParam] : "";
 
   const [etapa, setEtapa] = useState(normalizedEtapa);
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
-    "idle",
-  );
+  // _next debe ser una URL absoluta: se resuelve en el cliente para que
+  // funcione igual en el dominio de Vercel y en el dominio final.
+  const [nextUrl, setNextUrl] = useState("");
 
   // Sincroniza el select cuando se navega con ?etapa= sin recargar
   // (botones de ruta de la propia página de contacto).
@@ -42,7 +45,11 @@ export default function ContactForm() {
     if (normalizedEtapa) setEtapa(normalizedEtapa);
   }, [normalizedEtapa]);
 
-  if (status === "sent") {
+  useEffect(() => {
+    setNextUrl(`${window.location.origin}/contacto?enviado=1`);
+  }, []);
+
+  if (enviado) {
     return (
       <div className="border border-stone/40 p-10" role="status">
         <p className="text-[0.72rem] font-medium uppercase tracking-[0.28em] text-earth">
@@ -57,49 +64,23 @@ export default function ContactForm() {
 
   return (
     <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        const data = new FormData(e.currentTarget);
-        const etapaLabel =
-          data.get("etapa") === "construido"
-            ? "Ya tengo un proyecto construido"
-            : "Quiero iniciar desde 0";
-        setStatus("sending");
-        try {
-          const res = await fetch(
-            `https://formsubmit.co/ajax/${siteConfig.email}`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-              },
-              body: JSON.stringify({
-                Nombre: data.get("nombre"),
-                Correo: data.get("correo"),
-                Teléfono: data.get("telefono") || "—",
-                "Etapa del proyecto": etapaLabel,
-                Mensaje: data.get("mensaje"),
-                _subject: `Consulta de proyecto — ${data.get("nombre")}`,
-                _template: "table",
-                _captcha: "false",
-              }),
-            },
-          );
-          setStatus(res.ok ? "sent" : "error");
-        } catch {
-          setStatus("error");
-        }
-      }}
+      action={`https://formsubmit.co/${siteConfig.email}`}
+      method="POST"
       className="space-y-9"
     >
+      {/* Configuración de FormSubmit */}
+      <input type="hidden" name="_subject" value="Nueva consulta — sitio 19.89 Arquitectura" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      {nextUrl && <input type="hidden" name="_next" value={nextUrl} />}
+
       <div>
         <label htmlFor="nombre" className={fieldLabel}>
           Nombre
         </label>
         <input
           id="nombre"
-          name="nombre"
+          name="Nombre"
           type="text"
           required
           autoComplete="name"
@@ -114,7 +95,7 @@ export default function ContactForm() {
           </label>
           <input
             id="correo"
-            name="correo"
+            name="email"
             type="email"
             required
             autoComplete="email"
@@ -127,7 +108,7 @@ export default function ContactForm() {
           </label>
           <input
             id="telefono"
-            name="telefono"
+            name="Telefono"
             type="tel"
             autoComplete="tel"
             className={fieldInput}
@@ -141,7 +122,7 @@ export default function ContactForm() {
         </label>
         <select
           id="etapa"
-          name="etapa"
+          name="Etapa del proyecto"
           required
           value={etapa}
           onChange={(e) => setEtapa(e.target.value)}
@@ -150,8 +131,10 @@ export default function ContactForm() {
           <option value="" disabled>
             Seleccionar…
           </option>
-          <option value="desde-cero">Quiero iniciar desde 0</option>
-          <option value="construido">Ya tengo un proyecto construido</option>
+          <option value={etapaLabels["desde-cero"]}>
+            {etapaLabels["desde-cero"]}
+          </option>
+          <option value={etapaLabels.construido}>{etapaLabels.construido}</option>
         </select>
       </div>
 
@@ -161,30 +144,16 @@ export default function ContactForm() {
         </label>
         <textarea
           id="mensaje"
-          name="mensaje"
+          name="Mensaje"
           rows={5}
           required
           className={`${fieldInput} resize-y`}
         />
       </div>
 
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className={`${buttonClasses("earth")} disabled:opacity-60`}
-      >
-        {status === "sending" ? "Enviando…" : "Enviar mensaje"}
+      <button type="submit" className={buttonClasses("earth")}>
+        Enviar mensaje
       </button>
-
-      {status === "error" && (
-        <p role="alert" className="text-sm font-normal text-earth">
-          No pudimos enviar el mensaje. Intentá de nuevo o escribinos directo a{" "}
-          <a href={`mailto:${siteConfig.email}`} className="underline underline-offset-4">
-            {siteConfig.email}
-          </a>{" "}
-          o por WhatsApp.
-        </p>
-      )}
     </form>
   );
 }
