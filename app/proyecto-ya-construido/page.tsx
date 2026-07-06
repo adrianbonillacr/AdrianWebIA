@@ -86,26 +86,31 @@ export default function ProyectoYaConstruidoPage() {
             </div>
           </Reveal>
 
-          <Reveal className="mt-16">
-            <p className="mb-6 text-[0.68rem] font-medium uppercase tracking-[0.26em] text-earth">
-              Qué buscamos durante la consultoría
-            </p>
-            <ul className="grid gap-px border border-stone/40 bg-stone/40 md:grid-cols-2" role="list">
+          <div className="mt-16">
+            <Reveal>
+              <p className="mb-2 text-[0.68rem] font-medium uppercase tracking-[0.26em] text-earth">
+                Qué buscamos durante la consultoría
+              </p>
+            </Reveal>
+            <ul role="list">
               {consultingGoals.map((goal, i) => (
-                <li
-                  key={goal}
-                  className={`flex items-baseline gap-5 bg-white p-6 ${
-                    i === consultingGoals.length - 1 ? "md:col-span-2" : ""
-                  }`}
-                >
-                  <span className="text-lg font-semibold leading-none text-earth">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="font-light leading-[1.65] text-charcoal">{goal}</span>
-                </li>
+                <Reveal key={goal} delay={i * 80}>
+                  <li className="grid grid-cols-[4rem_1fr] items-baseline gap-6 border-t border-stone/40 py-7 md:grid-cols-[7rem_1fr] md:gap-8">
+                    <span
+                      aria-hidden="true"
+                      className="text-[clamp(1.8rem,3vw,2.4rem)] font-semibold leading-none text-earth"
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="max-w-[58ch] font-light leading-[1.7] text-charcoal md:text-lg">
+                      {goal}
+                    </p>
+                  </li>
+                </Reveal>
               ))}
             </ul>
-          </Reveal>
+            <div className="border-t border-stone/40" aria-hidden="true" />
+          </div>
         </div>
       </section>
 
