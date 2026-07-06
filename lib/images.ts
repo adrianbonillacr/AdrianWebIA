@@ -25,11 +25,11 @@ export const siteImages = {
 
 /** Cantidad de imágenes reales disponibles por galería de proyecto. */
 const projectGalleryCounts: Record<string, number> = {
-  "tree-lodge": 5,
-  cafetal: 5,
-  "diciembre-seis": 5,
-  kahwi: 5,
-  amarea: 5,
+  "tree-lodge": 8,
+  cafetal: 9,
+  "diciembre-seis": 9,
+  kahwi: 10,
+  amarea: 10,
   edica: 2,
   "flex-center": 2,
 };
