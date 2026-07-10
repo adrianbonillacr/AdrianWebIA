@@ -3,13 +3,17 @@ import Link from "next/link";
 import { Suspense } from "react";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
+import { getDict, isLang, type Lang } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site-config";
 
-export const metadata: Metadata = {
-  title: "Contacto — Conversemos sobre tu proyecto",
-  description:
-    "Contanos en qué etapa está tu proyecto inmobiliario. Escribinos por WhatsApp, correo o Instagram — 1989 Arquitectura, Costa Rica.",
-};
+type Params = Promise<{ lang: string }>;
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLang(lang)) return {};
+  const t = getDict(lang);
+  return { title: t.contactPage.metaTitle, description: t.contactPage.metaDescription };
+}
 
 function WhatsAppIcon() {
   return (
@@ -29,7 +33,12 @@ function WhatsAppIcon() {
 const directLabel =
   "text-[0.7rem] font-medium uppercase tracking-[0.24em] text-earth";
 
-export default function ContactoPage() {
+export default async function ContactoPage({ params }: { params: Params }) {
+  const { lang: rawLang } = await params;
+  const lang = rawLang as Lang;
+  const t = getDict(lang);
+  const c = t.contactPage;
+
   return (
     <>
       {/* Hero mínimo */}
@@ -38,33 +47,31 @@ export default function ContactoPage() {
           <div className="flex items-center gap-4">
             <span aria-hidden="true" className="h-[0.4rem] w-[0.4rem] rounded-full bg-earth" />
             <p className="text-[0.72rem] font-medium uppercase tracking-[0.28em] text-earth">
-              Contacto
+              {c.heroEyebrow}
             </p>
             <span className="h-px flex-1 bg-stone/40" aria-hidden="true" />
           </div>
           <h1 className="mt-8 max-w-[20ch] text-[clamp(2.2rem,5vw,3.8rem)] font-semibold leading-[1.12] text-ink">
-            Conversemos sobre tu proyecto.
+            {c.heroTitle}
           </h1>
           <p className="mt-7 max-w-[58ch] text-lg font-light leading-[1.7] text-charcoal">
-            Ya sea que estés iniciando una inversión o buscando elevar el
-            valor de una propiedad existente, podemos ayudarte a definir el
-            siguiente paso con claridad.
+            {c.heroText}
           </p>
           {/* Dos rutas claras: preseleccionan la etapa en el formulario */}
           <div className="mt-9 flex flex-wrap gap-4">
             <Link
-              href="/contacto?etapa=desde-cero"
+              href={`/${lang}/contacto?etapa=desde-cero`}
               scroll={false}
               className="inline-block border border-ink px-6 py-3.5 text-[0.72rem] font-normal uppercase tracking-[0.14em] text-ink transition-colors duration-300 hover:bg-ink hover:text-white"
             >
-              Quiero desarrollar un proyecto desde 0
+              {c.routeNew}
             </Link>
             <Link
-              href="/contacto?etapa=construido"
+              href={`/${lang}/contacto?etapa=construido`}
               scroll={false}
               className="inline-block border border-ink px-6 py-3.5 text-[0.72rem] font-normal uppercase tracking-[0.14em] text-ink transition-colors duration-300 hover:bg-ink hover:text-white"
             >
-              Quiero diagnosticar una propiedad existente
+              {c.routeBuilt}
             </Link>
           </div>
         </div>
@@ -76,13 +83,13 @@ export default function ContactoPage() {
             <div className="grid gap-16 lg:grid-cols-[3fr_2fr] lg:gap-24">
               {/* Formulario */}
               <Suspense fallback={null}>
-                <ContactForm />
+                <ContactForm t={c.form} />
               </Suspense>
 
               {/* Contacto directo */}
               <aside className="lg:border-l lg:border-stone/40 lg:pl-12">
                 <h2 className="text-[0.72rem] font-medium uppercase tracking-[0.28em] text-ink">
-                  Contacto directo
+                  {c.directTitle}
                 </h2>
 
                 <a
@@ -100,7 +107,7 @@ export default function ContactoPage() {
 
                 <dl className="mt-10 space-y-8">
                   <div>
-                    <dt className={directLabel}>Correo</dt>
+                    <dt className={directLabel}>{c.emailLabel}</dt>
                     <dd className="mt-2">
                       <a
                         href={`mailto:${siteConfig.email}`}
@@ -111,7 +118,7 @@ export default function ContactoPage() {
                     </dd>
                   </div>
                   <div>
-                    <dt className={directLabel}>Instagram</dt>
+                    <dt className={directLabel}>{c.instagramLabel}</dt>
                     <dd className="mt-2">
                       <a
                         href={siteConfig.instagram}
@@ -124,8 +131,8 @@ export default function ContactoPage() {
                     </dd>
                   </div>
                   <div>
-                    <dt className={directLabel}>Ubicación</dt>
-                    <dd className="mt-2 font-light text-ink">Costa Rica</dd>
+                    <dt className={directLabel}>{c.locationLabel}</dt>
+                    <dd className="mt-2 font-light text-ink">{c.location}</dd>
                   </div>
                 </dl>
               </aside>

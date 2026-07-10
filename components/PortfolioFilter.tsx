@@ -3,25 +3,33 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
 
-const filters = [
-  { id: "todos", label: "Todos" },
-  { id: "arquitectura", label: "Arquitectura" },
-  { id: "iluminacion", label: "Iluminación" },
-] as const;
-
-type FilterId = (typeof filters)[number]["id"];
+type FilterId = "todos" | "arquitectura" | "iluminacion";
 
 /**
  * Tabs de filtro sin recarga. Los cards (server components) llegan como
  * children con data-categories; el filtrado es por CSS según data-filter
  * (ver globals.css), así las imágenes no se re-renderizan.
  */
-export default function PortfolioFilter({ children }: { children: ReactNode }) {
+export default function PortfolioFilter({
+  children,
+  labels,
+  groupLabel,
+}: {
+  children: ReactNode;
+  /** Etiquetas traducidas para: todos, arquitectura, iluminacion. */
+  labels: { todos: string; arquitectura: string; iluminacion: string };
+  groupLabel: string;
+}) {
   const [active, setActive] = useState<FilterId>("todos");
+  const filters: { id: FilterId; label: string }[] = [
+    { id: "todos", label: labels.todos },
+    { id: "arquitectura", label: labels.arquitectura },
+    { id: "iluminacion", label: labels.iluminacion },
+  ];
 
   return (
     <div>
-      <div className="flex flex-wrap gap-x-10 gap-y-4" role="group" aria-label="Filtrar proyectos">
+      <div className="flex flex-wrap gap-x-10 gap-y-4" role="group" aria-label={groupLabel}>
         {filters.map((filter) => {
           const isActive = active === filter.id;
           return (

@@ -4,19 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "@/components/Logo";
-import { siteConfig } from "@/lib/site-config";
+import { locales, switchLangPath, type Lang, type Dictionary } from "@/lib/i18n";
 
-const navLinks = [
-  { href: "/", label: "Inicio" },
-  { href: "/proyecto-desde-cero", label: "Desde 0" },
-  { href: "/proyecto-ya-construido", label: "Ya construido" },
-  { href: "/estrategia", label: "Estrategia 19.89" },
-  { href: "/disciplinas", label: "Disciplinas" },
-  { href: "/portafolio", label: "Portafolio" },
-  { href: "/contacto", label: "Contacto" },
-];
+type NavDict = Dictionary["nav"];
 
-// Rutas cuyo hero es oscuro: la navbar arranca transparente con texto blanco.
+// Rutas (sin prefijo de idioma) cuyo hero es oscuro: navbar transparente.
 const darkHeroRoutes = [
   "/",
   "/proyecto-desde-cero",
@@ -26,19 +18,30 @@ const darkHeroRoutes = [
 ];
 
 function isActive(pathname: string, href: string): boolean {
-  if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export default function Navbar() {
+export default function Navbar({ lang, t }: { lang: Lang; t: NavDict }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const burgerRef = useRef<HTMLButtonElement>(null);
 
+  const navLinks = [
+    { href: `/${lang}`, label: t.home },
+    { href: `/${lang}/proyecto-desde-cero`, label: t.newProject },
+    { href: `/${lang}/proyecto-ya-construido`, label: t.builtProject },
+    { href: `/${lang}/estrategia`, label: t.strategy },
+    { href: `/${lang}/disciplinas`, label: t.disciplines },
+    { href: `/${lang}/portafolio`, label: t.portfolio },
+    { href: `/${lang}/contacto`, label: t.contact },
+  ];
+
+  // Ruta sin el prefijo de idioma, para decidir el estilo del hero
+  const bare = "/" + pathname.split("/").slice(2).join("/");
   const hasDarkHero =
-    darkHeroRoutes.includes(pathname) || pathname.startsWith("/portafolio/");
+    darkHeroRoutes.includes(bare) || bare.startsWith("/portafolio/");
   const solid = scrolled || !hasDarkHero;
 
   useEffect(() => {
@@ -101,8 +104,6 @@ export default function Navbar() {
   const textColor = solid ? "text-ink" : "text-white";
 
   // Si el link apunta a la página actual, Next no navega: subimos al tope.
-  // (scrollTo sin "behavior" respeta scroll-behavior del CSS, que ya es
-  // smooth y se desactiva con prefers-reduced-motion.)
   const scrollTopIfSameRoute =
     (href: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
       if (pathname === href) {
@@ -110,6 +111,28 @@ export default function Navbar() {
         window.scrollTo({ top: 0 });
       }
     };
+
+  const LangSwitch = ({ className }: { className?: string }) => (
+    <div
+      aria-label={t.langSwitchLabel}
+      className={`flex items-center gap-2 text-[0.66rem] font-normal uppercase tracking-[0.15em] ${className ?? ""}`}
+    >
+      {locales.map((locale, i) => (
+        <span key={locale} className="flex items-center gap-2">
+          {i > 0 && <span aria-hidden="true" className="opacity-40">/</span>}
+          <Link
+            href={switchLangPath(pathname, locale)}
+            aria-current={locale === lang ? "true" : undefined}
+            className={`transition-opacity duration-300 ${
+              locale === lang ? "underline underline-offset-4 decoration-earth" : "opacity-60 hover:opacity-100"
+            }`}
+          >
+            {locale.toUpperCase()}
+          </Link>
+        </span>
+      ))}
+    </div>
+  );
 
   return (
     <header
@@ -121,18 +144,21 @@ export default function Navbar() {
     >
       <div className={`container-site flex h-20 items-center justify-between ${textColor}`}>
         <Link
-          href="/"
-          onClick={scrollTopIfSameRoute("/")}
+          href={`/${lang}`}
+          onClick={scrollTopIfSameRoute(`/${lang}`)}
           className="transition-opacity duration-300 hover:opacity-70"
-          aria-label="19.89 Arquitectura — Inicio"
+          aria-label={t.logoAria}
         >
           <Logo variant="mark" color={solid ? "ink" : "white"} iconClassName="h-9 w-auto" />
         </Link>
 
         {/* Navegación de escritorio */}
-        <nav aria-label="Principal" className="hidden items-center gap-6 min-[1200px]:flex">
+        <nav aria-label={t.mainNavLabel} className="hidden items-center gap-6 min-[1200px]:flex">
           {navLinks.map((link) => {
-            const active = isActive(pathname, link.href);
+            const active =
+              link.href === `/${lang}`
+                ? pathname === `/${lang}`
+                : isActive(pathname, link.href);
             return (
               <Link
                 key={link.href}
@@ -153,12 +179,13 @@ export default function Navbar() {
           })}
         </nav>
 
-        <div className="hidden min-[1200px]:block">
+        <div className="hidden items-center gap-6 min-[1200px]:flex">
+          <LangSwitch />
           <Link
-            href={siteConfig.calendarUrl}
+            href={`/${lang}/contacto`}
             className="inline-block bg-earth px-5 py-2.5 text-[0.72rem] font-normal uppercase tracking-[0.14em] text-white transition-colors duration-300 hover:bg-earth-dark"
           >
-            Agendar reunión
+            {t.cta}
           </Link>
         </div>
 
@@ -169,7 +196,7 @@ export default function Navbar() {
           onClick={() => setMenuOpen(true)}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
-          aria-label="Abrir menú"
+          aria-label={t.openMenu}
           className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 min-[1200px]:hidden"
         >
           <span aria-hidden="true" className="block h-px w-6 bg-current" />
@@ -185,7 +212,7 @@ export default function Navbar() {
           id="mobile-menu"
           role="dialog"
           aria-modal="true"
-          aria-label="Menú de navegación"
+          aria-label={t.menuLabel}
           className="fixed inset-0 z-50 flex h-dvh flex-col bg-ink text-white"
         >
           <div className="container-site flex h-20 items-center justify-between">
@@ -193,18 +220,21 @@ export default function Navbar() {
             <button
               type="button"
               onClick={closeMenu}
-              aria-label="Cerrar menú"
+              aria-label={t.closeMenu}
               className="flex h-10 w-10 items-center justify-center text-2xl font-light"
             >
               <span aria-hidden="true">×</span>
             </button>
           </div>
           <nav
-            aria-label="Principal"
-            className="container-site flex flex-1 flex-col justify-center gap-7"
+            aria-label={t.mainNavLabel}
+            className="container-site flex flex-1 flex-col justify-center gap-6"
           >
             {navLinks.map((link) => {
-              const active = isActive(pathname, link.href);
+              const active =
+                link.href === `/${lang}`
+                  ? pathname === `/${lang}`
+                  : isActive(pathname, link.href);
               return (
                 <Link
                   key={link.href}
@@ -222,12 +252,13 @@ export default function Navbar() {
                 </Link>
               );
             })}
+            <LangSwitch className="mt-4" />
             <Link
-              href={siteConfig.calendarUrl}
+              href={`/${lang}/contacto`}
               onClick={() => setMenuOpen(false)}
-              className="mt-6 inline-block w-fit bg-earth px-8 py-4 text-[0.8rem] font-normal uppercase tracking-[0.14em] text-white transition-colors duration-300 hover:bg-earth-dark"
+              className="mt-2 inline-block w-fit bg-earth px-8 py-4 text-[0.8rem] font-normal uppercase tracking-[0.14em] text-white transition-colors duration-300 hover:bg-earth-dark"
             >
-              Agendar reunión
+              {t.cta}
             </Link>
           </nav>
         </div>

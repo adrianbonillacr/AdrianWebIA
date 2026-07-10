@@ -4,36 +4,37 @@ import { notFound } from "next/navigation";
 import BrandImage from "@/components/BrandImage";
 import CtaBanner from "@/components/CtaBanner";
 import Reveal from "@/components/Reveal";
+import { getDict, isLang, type Lang } from "@/lib/i18n";
 import { projectImages, type ImageTone } from "@/lib/images";
-import { categoryLabel, getProject, projects } from "@/lib/projects";
-import { siteConfig } from "@/lib/site-config";
+import { getProject, projects } from "@/lib/projects";
 
-type Params = Promise<{ slug: string }>;
+type Params = Promise<{ lang: string; slug: string }>;
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Params;
-}): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { lang, slug } = await params;
+  if (!isLang(lang)) return {};
+  const t = getDict(lang);
   const project = getProject(slug);
   if (!project) return {};
+  const category = project.categories.map((c) => t.categories[c]).join(" · ");
   return {
-    title: `${project.name} — Portafolio`,
+    title: t.portfolio.metaProjectTitle(project.name),
     description:
-      project.excerpt ??
-      `${project.name}: proyecto de ${categoryLabel(project).toLowerCase()} desarrollado por 1989 Arquitectura en Costa Rica.`,
+      t.projectExcerpts[project.slug] ??
+      t.portfolio.metaProjectDescription(project.name, category),
   };
 }
 
 const galleryTones: ImageTone[] = ["earth", "charcoal", "stone", "ink", "mist"];
 
 export default async function ProjectPage({ params }: { params: Params }) {
-  const { slug } = await params;
+  const { lang: rawLang, slug } = await params;
+  const lang = rawLang as Lang;
+  const t = getDict(lang);
   const project = getProject(slug);
   if (!project) notFound();
 
@@ -41,6 +42,8 @@ export default async function ProjectPage({ params }: { params: Params }) {
   const prev = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
   const gallery = projectImages(project.slug).gallery;
+  const categoryText = project.categories.map((c) => t.categories[c]).join(" · ");
+  const excerpt = t.projectExcerpts[project.slug];
 
   return (
     <>
@@ -50,20 +53,17 @@ export default async function ProjectPage({ params }: { params: Params }) {
           <div className="flex items-center gap-4">
             <span aria-hidden="true" className="h-[0.4rem] w-[0.4rem] rounded-full bg-stone" />
             <p className="text-[0.72rem] font-medium uppercase tracking-[0.28em] text-stone">
-              {categoryLabel(project)}
+              {categoryText}
             </p>
             <span className="h-px flex-1 bg-stone/40" aria-hidden="true" />
           </div>
           <h1 className="mt-8 text-[clamp(2.4rem,5.5vw,4rem)] font-semibold leading-[1.1]">
             {project.name}
           </h1>
-          {project.excerpt ? (
+          {excerpt && (
             <p className="mt-7 max-w-[62ch] text-lg font-light leading-[1.7] text-mist">
-              {project.excerpt}
+              {excerpt}
             </p>
-          ) : (
-            // TODO: descripción del proyecto (agregar excerpt en /lib/projects.ts)
-            null
           )}
         </div>
       </section>
@@ -75,7 +75,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
             <Reveal key={src}>
               <BrandImage
                 src={src}
-                alt={`Proyecto ${project.name} — 19.89 Arquitectura (imagen ${i + 1})`}
+                alt={t.portfolio.galleryAlt(project.name, i + 1)}
                 tone={galleryTones[i % galleryTones.length]}
                 label={project.name}
                 className="aspect-[16/9]"
@@ -86,29 +86,29 @@ export default async function ProjectPage({ params }: { params: Params }) {
         </div>
       </section>
 
-      {/* Navegación anterior / siguiente — hover tipográfico, sin bloques de fondo */}
-      <nav aria-label="Otros proyectos" className="border-t border-stone/40 bg-white">
+      {/* Navegación anterior / siguiente — hover tipográfico */}
+      <nav aria-label={t.portfolio.otherProjectsLabel} className="border-t border-stone/40 bg-white">
         <div className="container-site grid grid-cols-2">
           <Link
-            href={`/portafolio/${prev.slug}`}
+            href={`/${lang}/portafolio/${prev.slug}`}
             className="group flex flex-col justify-center border-r border-stone/40 py-12 pr-6"
           >
             <span className="flex items-center gap-3 text-[0.68rem] font-normal uppercase tracking-[0.24em] text-stone transition-colors duration-300 group-hover:text-earth">
               <span aria-hidden="true" className="transition-transform duration-300 group-hover:-translate-x-1.5">
                 ←
               </span>
-              Anterior
+              {t.portfolio.previous}
             </span>
             <span className="mt-3 block text-lg font-medium text-ink transition-colors duration-300 group-hover:text-earth">
               {prev.name}
             </span>
           </Link>
           <Link
-            href={`/portafolio/${next.slug}`}
+            href={`/${lang}/portafolio/${next.slug}`}
             className="group flex flex-col items-end justify-center py-12 pl-6 text-right"
           >
             <span className="flex items-center gap-3 text-[0.68rem] font-normal uppercase tracking-[0.24em] text-stone transition-colors duration-300 group-hover:text-earth">
-              Siguiente
+              {t.portfolio.next}
               <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1.5">
                 →
               </span>
@@ -123,14 +123,13 @@ export default async function ProjectPage({ params }: { params: Params }) {
       <CtaBanner
         title={
           <>
-            Una propiedad puede construirse en meses.{" "}
-            <span className="text-stone">
-              Un proyecto extraordinario se construye con estrategia.
-            </span>
+            {t.common.claim.part1}{" "}
+            <span className="text-stone">{t.common.claim.part2}</span>{" "}
+            {t.common.claim.part3}
           </>
         }
-        buttonLabel="Agendar una reunión estratégica"
-        buttonHref={siteConfig.calendarUrl}
+        buttonLabel={t.common.scheduleMeeting}
+        buttonHref={`/${lang}/contacto`}
       />
     </>
   );

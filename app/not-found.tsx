@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 
+// 404 global (fuera del árbol de idioma): texto breve en ambos idiomas.
 export default function NotFound() {
   return (
     <section className="flex min-h-svh items-center bg-ink text-white">
@@ -16,9 +17,15 @@ export default function NotFound() {
         <p className="mt-6 max-w-[52ch] text-lg font-light leading-[1.7] text-mist">
           Pero tu proyecto sí. Volvé al inicio y descubrí cómo trabajamos.
         </p>
-        <div className="mt-10">
-          <Button href="/" variant="outline-light">
+        <p className="mt-2 max-w-[52ch] text-sm font-light leading-[1.7] text-stone">
+          This page does not exist — but your project does.
+        </p>
+        <div className="mt-10 flex flex-wrap gap-4">
+          <Button href="/es" variant="outline-light">
             Volver al inicio
+          </Button>
+          <Button href="/en" variant="outline-light">
+            Back to home
           </Button>
         </div>
       </div>

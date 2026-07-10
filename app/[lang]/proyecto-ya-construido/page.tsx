@@ -1,68 +1,38 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ArrowLink from "@/components/ArrowLink";
 import CtaBanner from "@/components/CtaBanner";
 import InteriorHero from "@/components/InteriorHero";
 import Reveal from "@/components/Reveal";
 import SectionHeader from "@/components/SectionHeader";
-import { valueIndexDimensions } from "@/lib/process-steps";
-import { analysisToAction } from "@/lib/services";
+import { getDict, isLang, type Lang } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Proyecto ya construido — Diagnóstico Estratégico del Proyecto",
-  description:
-    "Consultoría estratégica para comprender el estado actual de una propiedad, identificar oportunidades de mejora y orientar futuras decisiones de inversión.",
-};
+type Params = Promise<{ lang: string }>;
 
-const consultingGoals = [
-  "Comprender el funcionamiento general del proyecto.",
-  "Identificar fortalezas y oportunidades de mejora.",
-  "Detectar aspectos que afectan la experiencia del usuario o huésped.",
-  "Establecer prioridades de intervención.",
-  "Orientar futuras inversiones mediante una estrategia clara.",
-];
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLang(lang)) return {};
+  const t = getDict(lang);
+  return { title: t.built.metaTitle, description: t.built.metaDescription };
+}
 
-const roadmapStages = [
-  {
-    number: "01",
-    title: "Desarrollo del proyecto",
-    href: "/proyecto-desde-cero#etapa-2",
-  },
-  {
-    number: "02",
-    title: "Identidad y posicionamiento",
-    href: "/proyecto-desde-cero#etapa-3",
-  },
-  {
-    number: "03",
-    title: "Tecnología al servicio del usuario",
-    href: "/proyecto-desde-cero#etapa-4",
-  },
-  {
-    number: "04",
-    title: "Del análisis a la acción",
-    href: "/estrategia",
-  },
-];
+export default async function ProyectoYaConstruidoPage({ params }: { params: Params }) {
+  const { lang: rawLang } = await params;
+  const lang = rawLang as Lang;
+  const t = getDict(lang);
+  const b = t.built;
 
-export default function ProyectoYaConstruidoPage() {
   return (
     <>
-      <InteriorHero
-        eyebrow="Proyecto ya construido"
-        title="Medimos primero. Invertimos después."
-        subtitle="Una consultoría estratégica para comprender el estado actual de una propiedad, identificar oportunidades de mejora y orientar futuras decisiones de inversión."
-      />
+      <InteriorHero eyebrow={b.heroEyebrow} title={b.heroTitle} subtitle={b.heroSubtitle} />
 
       {/* INTRO */}
       <section className="section-pad bg-mist">
         <div className="container-site">
           <Reveal className="mx-auto max-w-3xl text-center">
-            <SectionHeader eyebrow="Diagnóstico Estratégico del Proyecto" align="center" />
+            <SectionHeader eyebrow={b.introEyebrow} align="center" />
             <p className="mx-auto mt-10 max-w-[56ch] text-[clamp(1.15rem,2.2vw,1.5rem)] font-light leading-[1.6] text-ink">
-              El Diagnóstico Estratégico del Proyecto está diseñado para
-              comprender cómo funciona una propiedad existente, detectar
-              oportunidades de mejora y establecer una estrategia clara para
-              aumentar su experiencia, diferenciación y valor a largo plazo.
+              {b.introText}
             </p>
           </Reveal>
         </div>
@@ -73,15 +43,9 @@ export default function ProyectoYaConstruidoPage() {
         <div className="container-site">
           <Reveal>
             <div className="grid gap-10 md:grid-cols-[1fr_1.5fr] md:gap-16">
-              <SectionHeader
-                eyebrow="¿Por qué comenzar con un diagnóstico?"
-                title="Las mejores decisiones se toman cuando existe claridad."
-              />
+              <SectionHeader eyebrow={b.whyEyebrow} title={b.whyTitle} />
               <p className="max-w-[56ch] self-end text-lg font-light leading-[1.7] text-charcoal">
-                Antes de invertir, remodelar o implementar nuevas disciplinas,
-                es fundamental comprender cómo funciona el proyecto, cuáles
-                son sus fortalezas y dónde se encuentran las mayores
-                oportunidades de mejora.
+                {b.whyText}
               </p>
             </div>
           </Reveal>
@@ -89,11 +53,11 @@ export default function ProyectoYaConstruidoPage() {
           <div className="mt-16">
             <Reveal>
               <p className="mb-2 text-[0.68rem] font-medium uppercase tracking-[0.26em] text-earth">
-                Qué buscamos durante la consultoría
+                {b.goalsLabel}
               </p>
             </Reveal>
             <ul role="list">
-              {consultingGoals.map((goal, i) => (
+              {b.goals.map((goal, i) => (
                 <Reveal key={goal} delay={i * 80}>
                   <li className="grid grid-cols-[4rem_1fr] items-baseline gap-6 border-t border-stone/40 py-7 md:grid-cols-[7rem_1fr] md:gap-8">
                     <span
@@ -118,19 +82,14 @@ export default function ProyectoYaConstruidoPage() {
       <section className="section-pad bg-charcoal text-white">
         <div className="container-site">
           <Reveal>
-            <SectionHeader
-              eyebrow="Índice de Valor 19.89"
-              title="Cinco dimensiones para entender dónde invertir primero."
-              dark
-            />
+            <SectionHeader eyebrow={b.indexEyebrow} title={b.indexTitle} dark />
             <p className="mt-6 max-w-[56ch] font-light leading-[1.7] text-mist">
-              El resultado del diagnóstico permite entender dónde invertir
-              primero y qué acciones pueden generar mayor impacto.
+              {b.indexText}
             </p>
           </Reveal>
           <Reveal className="mt-14 max-w-3xl">
             <ul className="space-y-8" role="list">
-              {valueIndexDimensions.map((dimension) => (
+              {t.valueDims.map((dimension) => (
                 <li key={dimension.label}>
                   <span className="text-[0.78rem] font-medium uppercase tracking-[0.2em] text-white">
                     {dimension.label}
@@ -145,7 +104,7 @@ export default function ProyectoYaConstruidoPage() {
               ))}
             </ul>
             <p className="mt-8 text-[0.68rem] font-normal uppercase tracking-[0.2em] text-stone">
-              Ejemplo visual — la medición real se construye durante el diagnóstico de cada proyecto
+              {b.indexNote}
             </p>
           </Reveal>
         </div>
@@ -156,28 +115,22 @@ export default function ProyectoYaConstruidoPage() {
         <div className="container-site">
           <Reveal>
             <div className="grid gap-10 md:grid-cols-[1fr_1.5fr] md:gap-16">
-              <SectionHeader
-                eyebrow="Proyecto Roadmap"
-                title="Prioridades claras, inversión ordenada."
-              />
+              <SectionHeader eyebrow={b.roadmapEyebrow} title={b.roadmapTitle} />
               <p className="max-w-[56ch] self-end text-lg font-light leading-[1.7] text-charcoal">
-                Después del diagnóstico, se define una hoja de ruta con
-                prioridades claras. Esta hoja de ruta permite contratar las
-                disciplinas de forma integral o por etapas según el nivel de
-                urgencia, impacto y presupuesto.
+                {b.roadmapText}
               </p>
             </div>
           </Reveal>
 
           <Reveal className="mt-16">
             <p className="mb-6 text-[0.68rem] font-medium uppercase tracking-[0.26em] text-earth">
-              Etapas posteriores recomendadas
+              {b.roadmapStagesLabel}
             </p>
             <div className="grid gap-px border border-stone/40 bg-stone/40 sm:grid-cols-2 lg:grid-cols-4">
-              {roadmapStages.map((stage) => (
-                <a
+              {b.roadmapStages.map((stage) => (
+                <Link
                   key={stage.title}
-                  href={stage.href}
+                  href={`/${lang}${stage.href}`}
                   className="group bg-white p-6 transition-colors duration-300 hover:bg-mist/50"
                 >
                   <span className="text-[clamp(1.6rem,2.6vw,2.1rem)] font-semibold leading-none text-earth">
@@ -187,7 +140,7 @@ export default function ProyectoYaConstruidoPage() {
                     {stage.title}
                   </p>
                   <span className="mt-3 inline-block text-[0.66rem] font-normal uppercase tracking-[0.22em] text-stone transition-colors duration-300 group-hover:text-earth">
-                    Ver etapa{" "}
+                    {b.seeStage}{" "}
                     <span
                       aria-hidden="true"
                       className="inline-block transition-transform duration-300 group-hover:translate-x-1"
@@ -195,17 +148,17 @@ export default function ProyectoYaConstruidoPage() {
                       →
                     </span>
                   </span>
-                </a>
+                </Link>
               ))}
             </div>
           </Reveal>
 
           <Reveal className="mx-auto mt-20 max-w-3xl text-center">
             <p className="mx-auto max-w-[56ch] text-[clamp(1.05rem,2vw,1.35rem)] font-light leading-[1.6] text-ink">
-              {analysisToAction.description}
+              {b.closingText}
             </p>
             <div className="mt-8 flex justify-center">
-              <ArrowLink href="/estrategia">Conocer la Estrategia 19.89</ArrowLink>
+              <ArrowLink href={`/${lang}/estrategia`}>{b.closingLink}</ArrowLink>
             </div>
           </Reveal>
         </div>
@@ -215,12 +168,12 @@ export default function ProyectoYaConstruidoPage() {
       <CtaBanner
         title={
           <>
-            Medimos primero.{" "}
-            <span className="text-stone">Invertimos después.</span>
+            {b.ctaTitlePart1}{" "}
+            <span className="text-stone">{b.ctaTitlePart2}</span>
           </>
         }
-        buttonLabel="Quiero diagnosticar mi proyecto"
-        buttonHref="/contacto?etapa=construido"
+        buttonLabel={b.ctaButton}
+        buttonHref={`/${lang}/contacto?etapa=construido`}
       />
     </>
   );

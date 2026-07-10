@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Script from "next/script";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
@@ -59,22 +57,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     // suppressHydrationWarning: el script inline agrega la clase "js" antes de
-    // la hidratación (solo afecta atributos de <html>, no al contenido).
+    // la hidratación; el idioma del documento lo ajusta SetHtmlLang por ruta.
     <html lang="es" className={poppins.variable} suppressHydrationWarning>
       <body>
         {/* Marca html.js para que los reveals solo oculten contenido con JS activo */}
         <Script id="js-flag" strategy="beforeInteractive">
           {"document.documentElement.classList.add('js')"}
         </Script>
-        <a
-          href="#contenido"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-earth focus:px-5 focus:py-3 focus:text-[0.8rem] focus:uppercase focus:tracking-[0.14em] focus:text-white"
-        >
-          Saltar al contenido
-        </a>
-        <Navbar />
-        <main id="contenido">{children}</main>
-        <Footer />
+        {children}
         <CustomCursor />
         <script
           type="application/ld+json"

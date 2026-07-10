@@ -4,21 +4,16 @@ import CtaBanner from "@/components/CtaBanner";
 import InteriorHero from "@/components/InteriorHero";
 import Reveal from "@/components/Reveal";
 import SectionHeader from "@/components/SectionHeader";
-import {
-  analysisToAction,
-  assetSelection,
-  digitalMarketing,
-  financialAnalysis,
-  marketingPackages,
-  strategicDiagnosis,
-  technology,
-} from "@/lib/services";
+import { getDict, isLang, type Lang } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Proyecto desde 0 — La mejor inversión comienza con la propiedad correcta",
-  description:
-    "Un camino estratégico para iniciar proyectos inmobiliarios con claridad, criterio y visión de largo plazo: asesoría de inversión, desarrollo, identidad y tecnología.",
-};
+type Params = Promise<{ lang: string }>;
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLang(lang)) return {};
+  const t = getDict(lang);
+  return { title: t.fromZero.metaTitle, description: t.fromZero.metaDescription };
+}
 
 /** Punto de lista de marca: cuadrado fino earth + texto ligero. */
 function BrandList({ items, dark }: { items: string[]; dark?: boolean }) {
@@ -49,41 +44,23 @@ function ListLabel({ children, dark }: { children: string; dark?: boolean }) {
   );
 }
 
-const developmentDisciplines = [
-  "Análisis financiero estratégico",
-  "Arquitectura",
-  "Diseño de iluminación",
-  "Diseño de interiores",
-  "Mobiliario & decoración",
-];
+export default async function ProyectoDesdeCeroPage({ params }: { params: Params }) {
+  const { lang: rawLang } = await params;
+  const lang = rawLang as Lang;
+  const t = getDict(lang);
+  const z = t.fromZero;
 
-const identityDisciplines = [
-  "Protección de identidad",
-  "Fotografía profesional",
-  "Marketing digital",
-];
-
-export default function ProyectoDesdeCeroPage() {
   return (
     <>
-      <InteriorHero
-        eyebrow="Proyecto desde 0"
-        title="La mejor inversión comienza con la propiedad correcta."
-        subtitle="Un camino estratégico para iniciar proyectos inmobiliarios con claridad, criterio y visión de largo plazo."
-      />
+      <InteriorHero eyebrow={z.heroEyebrow} title={z.heroTitle} subtitle={z.heroSubtitle} />
 
       {/* INTRO */}
       <section className="section-pad bg-mist">
         <div className="container-site">
           <Reveal className="mx-auto max-w-3xl text-center">
-            <SectionHeader eyebrow="El punto de partida" align="center" />
+            <SectionHeader eyebrow={z.introEyebrow} align="center" />
             <p className="mx-auto mt-10 max-w-[58ch] text-[clamp(1.15rem,2.2vw,1.5rem)] font-light leading-[1.6] text-ink">
-              Las decisiones más importantes de un proyecto suelen tomarse
-              antes del primer plano: elegir una propiedad, definir el
-              concepto, ordenar la inversión y entender cómo el proyecto
-              llegará al mercado. Sin una estrategia clara, pueden surgir
-              inversiones de bajo impacto, oportunidades desaprovechadas y
-              proyectos que no alcanzan su verdadero potencial.
+              {z.introText}
             </p>
           </Reveal>
         </div>
@@ -101,16 +78,11 @@ export default function ProyectoDesdeCeroPage() {
                 01
               </span>
               <div className="flex-1 pb-2">
-                <SectionHeader
-                  eyebrow="Etapa 1 · Asesoría de inversión"
-                  title="Antes de diseñar, evaluamos el punto de partida."
-                />
+                <SectionHeader eyebrow={z.stage1Eyebrow} title={z.stage1Title} />
               </div>
             </div>
             <p className="mt-8 max-w-[62ch] font-light leading-[1.7] text-charcoal">
-              Esta etapa permite entender si el cliente ya cuenta con una
-              propiedad o si necesita apoyo para seleccionar el activo
-              correcto.
+              {z.stage1Text}
             </p>
           </Reveal>
 
@@ -119,30 +91,30 @@ export default function ProyectoDesdeCeroPage() {
             <Reveal>
               <article className="flex h-full flex-col border border-stone/40 p-8 lg:p-10">
                 <p className="text-[0.66rem] font-medium uppercase tracking-[0.26em] text-stone">
-                  {assetSelection.option}
+                  {z.assetSelection.option}
                 </p>
                 <h3 className="mt-4 text-2xl font-semibold text-ink">
-                  {assetSelection.title}
+                  {z.assetSelection.title}
                 </h3>
                 <p className="mt-4 max-w-[52ch] font-light leading-[1.7] text-charcoal">
-                  {assetSelection.description}
+                  {z.assetSelection.description}
                 </p>
 
                 <div className="mt-8">
-                  <ListLabel>Qué incluye</ListLabel>
-                  <BrandList items={assetSelection.bullets} />
+                  <ListLabel>{z.assetSelection.includesLabel}</ListLabel>
+                  <BrandList items={z.assetSelection.bullets} />
                 </div>
 
                 <div className="mt-8">
-                  <ListLabel>Entregables</ListLabel>
-                  <BrandList items={assetSelection.deliverables} />
+                  <ListLabel>{z.assetSelection.deliverablesLabel}</ListLabel>
+                  <BrandList items={z.assetSelection.deliverables} />
                 </div>
 
+                {/* Honorarios sin montos: se detallan en la propuesta */}
                 <div className="mt-8 border-t border-stone/40 pt-6">
-                  <ListLabel>Honorarios</ListLabel>
-                  <p className="text-xl font-medium text-ink">{assetSelection.fee}</p>
-                  <p className="mt-3 max-w-[52ch] text-[0.82rem] font-light leading-[1.7] text-charcoal">
-                    {assetSelection.feeNote}
+                  <ListLabel>{z.assetSelection.feeLabel}</ListLabel>
+                  <p className="max-w-[52ch] text-[0.9rem] font-light leading-[1.7] text-charcoal">
+                    {z.assetSelection.feeNote}
                   </p>
                 </div>
               </article>
@@ -151,20 +123,20 @@ export default function ProyectoDesdeCeroPage() {
             {/* Card B · Diagnóstico estratégico — toda la card es clicable */}
             <Reveal delay={120}>
               <Link
-                href="/proyecto-ya-construido"
+                href={`/${lang}/proyecto-ya-construido`}
                 className="group flex h-full flex-col border border-stone/40 bg-mist/40 p-8 transition-colors duration-300 hover:bg-mist/70 lg:p-10"
               >
                 <p className="text-[0.66rem] font-medium uppercase tracking-[0.26em] text-stone">
-                  {strategicDiagnosis.option}
+                  {z.diagnosis.option}
                 </p>
                 <h3 className="mt-4 text-2xl font-semibold text-ink transition-colors duration-300 group-hover:text-earth">
-                  {strategicDiagnosis.title}
+                  {z.diagnosis.title}
                 </h3>
                 <p className="mt-4 max-w-[52ch] font-light leading-[1.7] text-charcoal">
-                  {strategicDiagnosis.description}
+                  {z.diagnosis.description}
                 </p>
                 <span className="mt-auto inline-flex items-center gap-3 pt-8 text-[0.8rem] font-normal uppercase tracking-[0.14em] text-earth">
-                  Ver diagnóstico estratégico
+                  {z.diagnosis.link}
                   <span
                     aria-hidden="true"
                     className="transition-transform duration-300 group-hover:translate-x-1.5"
@@ -190,23 +162,17 @@ export default function ProyectoDesdeCeroPage() {
                 02
               </span>
               <div className="flex-1 pb-2">
-                <SectionHeader
-                  eyebrow="Etapa 2 · Desarrollo del proyecto"
-                  title="La estrategia se convierte en proyecto."
-                />
+                <SectionHeader eyebrow={z.stage2Eyebrow} title={z.stage2Title} />
               </div>
             </div>
             <p className="mt-8 max-w-[62ch] font-light leading-[1.7] text-charcoal">
-              Con una estrategia definida y una hoja de ruta clara, comienza
-              la etapa de desarrollo. Cada disciplina se implementa según las
-              necesidades del proyecto y las oportunidades identificadas
-              durante el análisis.
+              {z.stage2Text}
             </p>
           </Reveal>
 
           <Reveal className="mt-12">
             <ul className="grid gap-px border border-stone/40 bg-stone/40 sm:grid-cols-2 lg:grid-cols-5" role="list">
-              {developmentDisciplines.map((name) => (
+              {z.developmentDisciplines.map((name) => (
                 <li key={name} className="bg-mist p-6">
                   <span className="text-[0.9rem] font-medium leading-snug text-ink">
                     {name}
@@ -220,22 +186,22 @@ export default function ProyectoDesdeCeroPage() {
           <Reveal className="mt-12">
             <div className="border border-stone/40 bg-white p-8 lg:p-12">
               <p className="text-[0.66rem] font-medium uppercase tracking-[0.26em] text-stone">
-                Análisis financiero estratégico
+                {z.financial.label}
               </p>
               <h3 className="mt-4 max-w-[28ch] text-2xl font-semibold leading-snug text-ink">
-                {financialAnalysis.title}
+                {z.financial.title}
               </h3>
               <div className="mt-6 grid gap-10 lg:grid-cols-2">
                 <p className="max-w-[52ch] font-light leading-[1.7] text-charcoal">
-                  {financialAnalysis.description}
+                  {z.financial.description}
                 </p>
                 <div>
-                  <ListLabel>Beneficios</ListLabel>
-                  <BrandList items={financialAnalysis.benefits} />
+                  <ListLabel>{z.financial.benefitsLabel}</ListLabel>
+                  <BrandList items={z.financial.benefits} />
                 </div>
               </div>
               <p className="mt-8 border-t border-stone/40 pt-5 text-[0.82rem] font-light leading-[1.7] text-charcoal">
-                {financialAnalysis.note}
+                {z.financial.note}
               </p>
             </div>
           </Reveal>
@@ -255,26 +221,20 @@ export default function ProyectoDesdeCeroPage() {
               </span>
               <div className="flex-1 pb-2">
                 <SectionHeader
-                  eyebrow="Etapa 3 · Identidad y posicionamiento"
-                  title="Un gran proyecto merece una identidad capaz de comunicar su valor."
+                  eyebrow={z.stage3Eyebrow}
+                  title={z.stage3Title}
                   titleClassName="max-w-[28ch]"
                 />
               </div>
             </div>
             <p className="mt-8 max-w-[68ch] font-light leading-[1.7] text-charcoal">
-              Una vez definida la estrategia y desarrolladas las
-              intervenciones físicas, comienza una nueva etapa: construir la
-              identidad, la narrativa y la presencia del proyecto. En la
-              Estrategia 19.89, la protección de identidad, la fotografía y el
-              marketing digital no se entienden como acciones independientes.
-              Son herramientas que permiten comunicar, posicionar y fortalecer
-              todo aquello que ya ha sido construido.
+              {z.stage3Text}
             </p>
           </Reveal>
 
           <Reveal className="mt-12">
             <ul className="grid gap-px border border-stone/40 bg-stone/40 sm:grid-cols-3" role="list">
-              {identityDisciplines.map((name) => (
+              {z.identityDisciplines.map((name) => (
                 <li key={name} className="bg-white p-6">
                   <span className="text-[0.9rem] font-medium leading-snug text-ink">
                     {name}
@@ -289,22 +249,22 @@ export default function ProyectoDesdeCeroPage() {
             <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
               <div>
                 <p className="text-[0.66rem] font-medium uppercase tracking-[0.26em] text-stone">
-                  Marketing digital
+                  {z.marketing.label}
                 </p>
                 <p className="mt-5 max-w-[42ch] text-xl font-light leading-[1.55] text-ink">
-                  {digitalMarketing.intro}
+                  {z.marketing.intro}
                 </p>
               </div>
               <div>
-                <ListLabel>Alcances</ListLabel>
-                <BrandList items={digitalMarketing.scope} />
+                <ListLabel>{z.marketing.scopeLabel}</ListLabel>
+                <BrandList items={z.marketing.scope} />
               </div>
             </div>
           </Reveal>
 
-          {/* Paquetes */}
+          {/* Paquetes (sin montos: la inversión se detalla en la propuesta) */}
           <div className="mt-14 grid gap-8 lg:grid-cols-3">
-            {marketingPackages.map((pkg, i) => (
+            {z.packages.map((pkg, i) => (
               <Reveal key={pkg.name} delay={i * 100}>
                 <article
                   className={`relative flex h-full flex-col border p-8 ${
@@ -318,7 +278,7 @@ export default function ProyectoDesdeCeroPage() {
                     />
                   )}
                   <p className="text-[0.66rem] font-medium uppercase tracking-[0.26em] text-stone">
-                    Paquete
+                    {z.marketing.packageLabel}
                   </p>
                   <h3 className="mt-2 text-2xl font-semibold uppercase tracking-[0.08em] text-ink">
                     {pkg.name}
@@ -327,7 +287,7 @@ export default function ProyectoDesdeCeroPage() {
                     {pkg.positioning}
                   </p>
                   <div className="mt-6 border-t border-stone/40 pt-6">
-                    <ListLabel>Incluye</ListLabel>
+                    <ListLabel>{z.marketing.includesLabel}</ListLabel>
                     <ul className="space-y-2.5" role="list">
                       {pkg.includes.map((item) => (
                         <li key={item} className="flex items-baseline gap-3">
@@ -342,13 +302,6 @@ export default function ProyectoDesdeCeroPage() {
                       ))}
                     </ul>
                   </div>
-                  <div className="mt-auto pt-8">
-                    <p className="text-[0.66rem] font-medium uppercase tracking-[0.26em] text-stone">
-                      Inversión
-                    </p>
-                    {/* TODO: definir precios finales de los paquetes */}
-                    <p className="mt-1 text-lg font-medium text-ink">{pkg.price}</p>
-                  </div>
                 </article>
               </Reveal>
             ))}
@@ -356,13 +309,16 @@ export default function ProyectoDesdeCeroPage() {
 
           <Reveal className="mt-8">
             <p className="max-w-[68ch] text-[0.82rem] font-light leading-[1.7] text-charcoal">
-              {digitalMarketing.travelNote}
+              {z.marketing.pricingNote}
+            </p>
+            <p className="mt-3 max-w-[68ch] text-[0.82rem] font-light leading-[1.7] text-charcoal">
+              {z.marketing.travelNote}
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* ETAPA 4 · TECNOLOGÍA AL SERVICIO DEL USUARIO */}
+      {/* ETAPA 4 · AUTOMATIZACIÓN Y MOVILIDAD */}
       <section id="etapa-4" className="section-pad scroll-mt-24 bg-ink text-white">
         <div className="container-site">
           <Reveal>
@@ -375,31 +331,31 @@ export default function ProyectoDesdeCeroPage() {
               </span>
               <div className="flex-1 pb-2">
                 <SectionHeader
-                  eyebrow="Etapa 4 · Tecnología al servicio del usuario"
-                  title={technology.title}
+                  eyebrow={z.stage4Eyebrow}
+                  title={z.stage4Title}
                   titleClassName="max-w-[30ch]"
                   dark
                 />
               </div>
             </div>
             <p className="mt-8 max-w-[62ch] font-light leading-[1.7] text-mist">
-              {technology.description}
+              {z.stage4Text}
             </p>
           </Reveal>
 
           <Reveal className="mt-12">
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
               <div>
-                <ListLabel dark>Qué evaluamos</ListLabel>
-                <BrandList items={technology.evaluation} dark />
+                <ListLabel dark>{z.stage4EvaluationLabel}</ListLabel>
+                <BrandList items={z.stage4Evaluation} dark />
               </div>
               <div>
-                <ListLabel dark>Beneficios</ListLabel>
-                <BrandList items={technology.benefits} dark />
+                <ListLabel dark>{z.stage4BenefitsLabel}</ListLabel>
+                <BrandList items={z.stage4Benefits} dark />
               </div>
             </div>
             <p className="mt-12 max-w-[62ch] border-l border-earth pl-5 font-light leading-[1.7] text-mist">
-              {technology.result}
+              {z.stage4Result}
             </p>
           </Reveal>
         </div>
@@ -409,9 +365,9 @@ export default function ProyectoDesdeCeroPage() {
       <section className="section-pad bg-white">
         <div className="container-site">
           <Reveal className="mx-auto max-w-3xl text-center">
-            <SectionHeader eyebrow={analysisToAction.title} align="center" />
+            <SectionHeader eyebrow={z.closingEyebrow} align="center" />
             <p className="mx-auto mt-10 max-w-[56ch] text-[clamp(1.15rem,2.2vw,1.5rem)] font-light leading-[1.6] text-ink">
-              {analysisToAction.description}
+              {z.closingText}
             </p>
           </Reveal>
         </div>
@@ -419,9 +375,9 @@ export default function ProyectoDesdeCeroPage() {
 
       {/* CTA FINAL */}
       <CtaBanner
-        title="La mejor inversión comienza con la propiedad correcta."
-        buttonLabel="Quiero desarrollar un proyecto desde 0"
-        buttonHref="/contacto?etapa=desde-cero"
+        title={z.ctaTitle}
+        buttonLabel={z.ctaButton}
+        buttonHref={`/${lang}/contacto?etapa=desde-cero`}
       />
     </>
   );

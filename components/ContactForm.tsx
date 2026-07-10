@@ -4,60 +4,57 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { buttonClasses } from "@/components/Button";
 import { siteConfig } from "@/lib/site-config";
+import type { Dictionary } from "@/lib/i18n";
+
+type FormDict = Dictionary["contactPage"]["form"];
 
 const fieldLabel =
   "block text-[0.7rem] font-medium uppercase tracking-[0.24em] text-earth";
 const fieldInput =
   "mt-2 w-full border-b border-stone bg-transparent px-0 py-3 font-light text-ink transition-colors duration-300 placeholder:text-stone focus:border-earth focus:outline-none";
 
-const etapaLabels: Record<string, string> = {
-  "desde-cero": "Quiero iniciar desde 0",
-  construido: "Ya tengo un proyecto construido",
-};
-
 /**
  * Formulario de contacto con envío real vía FormSubmit (POST nativo, sin
  * backend propio). Al enviar, FormSubmit entrega el correo a siteConfig.email
- * y redirige de vuelta a /contacto?enviado=1, donde se muestra la confirmación.
+ * y redirige de vuelta a la página de contacto con ?enviado=1.
  *
  * IMPORTANTE (una sola vez): el PRIMER envío desde el sitio publicado dispara
  * un correo de activación a siteConfig.email; hay que abrirlo y confirmar.
- * A partir de ahí, cada mensaje llega directo a la bandeja.
  *
  * TODO: si más adelante se quiere control total (plantillas, dominio propio),
  * migrar a Resend con una API route.
  */
-export default function ContactForm() {
+export default function ContactForm({ t }: { t: FormDict }) {
   const searchParams = useSearchParams();
   const etapaParam = searchParams.get("etapa");
   const enviado = searchParams.get("enviado") === "1";
   const normalizedEtapa =
-    etapaParam && etapaLabels[etapaParam] ? etapaLabels[etapaParam] : "";
+    etapaParam === "construido"
+      ? t.stageBuilt
+      : etapaParam === "desde-cero"
+        ? t.stageNew
+        : "";
 
   const [etapa, setEtapa] = useState(normalizedEtapa);
-  // _next debe ser una URL absoluta: se resuelve en el cliente para que
-  // funcione igual en el dominio de Vercel y en el dominio final.
+  // _next debe ser una URL absoluta; se resuelve en el cliente para funcionar
+  // igual en el dominio de Vercel y en el dominio final (mantiene el idioma).
   const [nextUrl, setNextUrl] = useState("");
 
-  // Sincroniza el select cuando se navega con ?etapa= sin recargar
-  // (botones de ruta de la propia página de contacto).
   useEffect(() => {
     if (normalizedEtapa) setEtapa(normalizedEtapa);
   }, [normalizedEtapa]);
 
   useEffect(() => {
-    setNextUrl(`${window.location.origin}/contacto?enviado=1`);
+    setNextUrl(`${window.location.origin}${window.location.pathname}?enviado=1`);
   }, []);
 
   if (enviado) {
     return (
       <div className="border border-stone/40 p-10" role="status">
         <p className="text-[0.72rem] font-medium uppercase tracking-[0.28em] text-earth">
-          Mensaje enviado
+          {t.sentTitle}
         </p>
-        <p className="mt-4 text-lg font-light leading-[1.7] text-ink">
-          Mensaje enviado. Te contactamos pronto.
-        </p>
+        <p className="mt-4 text-lg font-light leading-[1.7] text-ink">{t.sentText}</p>
       </div>
     );
   }
@@ -69,14 +66,14 @@ export default function ContactForm() {
       className="space-y-9"
     >
       {/* Configuración de FormSubmit */}
-      <input type="hidden" name="_subject" value="Nueva consulta — sitio 19.89 Arquitectura" />
+      <input type="hidden" name="_subject" value={t.subject} />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_captcha" value="false" />
       {nextUrl && <input type="hidden" name="_next" value={nextUrl} />}
 
       <div>
         <label htmlFor="nombre" className={fieldLabel}>
-          Nombre
+          {t.name}
         </label>
         <input
           id="nombre"
@@ -91,7 +88,7 @@ export default function ContactForm() {
       <div className="grid gap-9 sm:grid-cols-2">
         <div>
           <label htmlFor="correo" className={fieldLabel}>
-            Correo
+            {t.email}
           </label>
           <input
             id="correo"
@@ -104,7 +101,7 @@ export default function ContactForm() {
         </div>
         <div>
           <label htmlFor="telefono" className={fieldLabel}>
-            Teléfono
+            {t.phone}
           </label>
           <input
             id="telefono"
@@ -118,7 +115,7 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="etapa" className={fieldLabel}>
-          ¿En qué etapa está tu proyecto?
+          {t.stage}
         </label>
         <select
           id="etapa"
@@ -129,18 +126,16 @@ export default function ContactForm() {
           className={`${fieldInput} appearance-none`}
         >
           <option value="" disabled>
-            Seleccionar…
+            {t.stagePlaceholder}
           </option>
-          <option value={etapaLabels["desde-cero"]}>
-            {etapaLabels["desde-cero"]}
-          </option>
-          <option value={etapaLabels.construido}>{etapaLabels.construido}</option>
+          <option value={t.stageNew}>{t.stageNew}</option>
+          <option value={t.stageBuilt}>{t.stageBuilt}</option>
         </select>
       </div>
 
       <div>
         <label htmlFor="mensaje" className={fieldLabel}>
-          Contanos sobre tu proyecto
+          {t.message}
         </label>
         <textarea
           id="mensaje"
@@ -152,7 +147,7 @@ export default function ContactForm() {
       </div>
 
       <button type="submit" className={buttonClasses("earth")}>
-        Enviar mensaje
+        {t.submit}
       </button>
     </form>
   );

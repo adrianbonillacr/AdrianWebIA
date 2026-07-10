@@ -1,16 +1,12 @@
-import { homeDisciplines, type HomeDiscipline } from "@/lib/disciplines";
-
 /**
  * Grid de disciplinas sobre fondo ink. Las disciplinas son herramientas
  * dentro de la Estrategia 19.89 — nunca servicios protagonistas.
- * Celdas separadas por líneas de 1px stone/25; al hover la celda se aclara
- * levemente y una línea superior de 2px earth crece de 0 a 100%.
  */
 export default function DisciplineGrid({
-  items = homeDisciplines,
+  items,
   compact,
 }: {
-  items?: HomeDiscipline[];
+  items: { name: string; description: string }[];
   compact?: boolean;
 }) {
   return (

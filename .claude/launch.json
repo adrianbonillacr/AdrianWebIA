@@ -4,7 +4,7 @@
     {
       "name": "dev",
       "runtimeExecutable": "C:\\Users\\adria\\nodejs\\node.exe",
-      "runtimeArgs": ["node_modules/next/dist/bin/next", "dev"],
+      "runtimeArgs": ["node_modules/next/dist/bin/next", "dev", "-H", "0.0.0.0"],
       "port": 3000
     }
   ]

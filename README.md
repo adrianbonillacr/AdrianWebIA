@@ -74,9 +74,15 @@ const gilroy = localFont({
 
 (La imagen Open Graph usa los TTF de `/assets/fonts/` — opcionalmente reemplazarlos también por Gilroy en `app/opengraph-image.tsx`.)
 
+## Idiomas (ES / EN)
+
+El sitio es bilingüe con rutas por idioma: `/es/...` y `/en/...` (la raíz redirige a `/es`; las URLs viejas sin prefijo redirigen 308 al español). El selector ES / EN está en la navbar.
+
+**Todo el contenido vive en los diccionarios** `lib/i18n/es.ts` (fuente de verdad) y `lib/i18n/en.ts` (misma estructura). Para corregir un texto, editarlo en ambos archivos — las páginas no tienen textos hardcodeados.
+
 ## Estructura
 
-- `/app` — páginas (App Router), sitemap, robots, imagen OG generada en build
+- `/app/[lang]` — páginas por idioma (App Router); `/app` también tiene sitemap, robots e imagen OG generada en build
 - `/components` — UI (Navbar, Footer, SectionHeader, Button, ArrowLink, BrandImage, DisciplineGrid, CtaBanner…)
-- `/lib` — contenido tipado (proyectos, disciplinas, pasos, equipo, config) listo para migrar a un CMS
-- `/public/images` — carpetas vacías esperando las fotos reales
+- `/lib/i18n` — diccionarios de contenido ES/EN; `/lib` — proyectos, imágenes y config
+- `/public/images` — fotografías optimizadas del sitio
