@@ -460,7 +460,7 @@ export const en: Dictionary = {
   portfolio: {
     metaTitle: "Portfolio — Architecture and lighting projects",
     metaDescription:
-      "Projects with strategy behind them: architecture and lighting in Costa Rica. Tree Lodge, Cafetal, Diciembre Seis, Kahwi, Amarea, Edica and Flex Center.",
+      "Projects with strategy behind them: architecture and lighting in Costa Rica. Kahwi, Tree Lodge, Cafetal, Diciembre Seis and Amarea.",
     heroEyebrow: "Portfolio",
     heroTitle: "Projects with strategy behind them.",
     filterAll: "All",

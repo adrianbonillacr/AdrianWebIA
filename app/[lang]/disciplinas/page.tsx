@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import CtaBanner from "@/components/CtaBanner";
-import DisciplinesExplorer from "@/components/DisciplinesExplorer";
+import DisciplineAccordion from "@/components/DisciplineAccordion";
 import { getDict, isLang, type Lang } from "@/lib/i18n";
 
 type Params = Promise<{ lang: string }>;
@@ -42,19 +42,12 @@ export default async function DisciplinasPage({ params }: { params: Params }) {
         </div>
       </section>
 
-      {/* Grid + modal de detalle por disciplina */}
+      {/* Lista desplegable (acordeón): el detalle se abre debajo de cada ítem */}
       <section className="section-pad bg-white">
         <div className="container-site">
-          <DisciplinesExplorer
-            disciplines={t.disciplines}
-            labels={{
-              stageLabels: t.stageLabels,
-              pathTags: t.pathTags,
-              integrateLink: d.integrateLink,
-              modalLabel: d.modalLabel,
-              modalClose: d.modalClose,
-              modalPillar: d.modalPillar,
-            }}
+          <DisciplineAccordion
+            items={t.disciplines}
+            labels={{ stageLabels: t.stageLabels, pathTags: t.pathTags }}
           />
         </div>
       </section>

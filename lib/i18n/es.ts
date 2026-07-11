@@ -463,7 +463,7 @@ export const es = {
   portfolio: {
     metaTitle: "Portafolio — Proyectos de arquitectura e iluminación",
     metaDescription:
-      "Proyectos con estrategia detrás: arquitectura e iluminación en Costa Rica. Tree Lodge, Cafetal, Diciembre Seis, Kahwi, Amarea, Edica y Flex Center.",
+      "Proyectos con estrategia detrás: arquitectura e iluminación en Costa Rica. Kahwi, Tree Lodge, Cafetal, Diciembre Seis y Amarea.",
     heroEyebrow: "Portafolio",
     heroTitle: "Proyectos con estrategia detrás.",
     filterAll: "Todos",

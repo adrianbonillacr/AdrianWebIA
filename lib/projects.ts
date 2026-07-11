@@ -17,8 +17,6 @@ export const projects: Project[] = [
   { slug: "cafetal", name: "Cafetal", categories: ["arquitectura"] },
   { slug: "diciembre-seis", name: "Diciembre Seis", categories: ["arquitectura"] },
   { slug: "amarea", name: "Amarea", categories: ["arquitectura"] },
-  { slug: "edica", name: "Edica", categories: ["iluminacion"] },
-  { slug: "flex-center", name: "Flex Center", categories: ["iluminacion"] },
 ];
 
 /** Portada especial de Kahwi (la misma del portafolio destacado del inicio). */

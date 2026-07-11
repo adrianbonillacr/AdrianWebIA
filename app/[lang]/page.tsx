@@ -3,7 +3,7 @@ import Link from "next/link";
 import ArrowLink from "@/components/ArrowLink";
 import Button from "@/components/Button";
 import CtaBanner from "@/components/CtaBanner";
-import DisciplineGrid from "@/components/DisciplineGrid";
+import DisciplineAccordion from "@/components/DisciplineAccordion";
 import Logo from "@/components/Logo";
 import Preloader from "@/components/Preloader";
 import ProjectCard from "@/components/ProjectCard";
@@ -28,19 +28,8 @@ function categoryText(project: Project, t: ReturnType<typeof getDict>): string {
   return project.categories.map((c) => t.categories[c]).join(" · ");
 }
 
-const featuredArchitecture = ["kahwi", "tree-lodge", "cafetal", "diciembre-seis", "amarea"];
-const featuredLighting = ["edica", "flex-center", "kahwi"];
-
-function PortfolioLabel({ label }: { label: string }) {
-  return (
-    <div className="flex items-center gap-4">
-      <span className="text-[0.72rem] font-medium uppercase tracking-[0.28em] text-ink">
-        {label}
-      </span>
-      <span className="h-px flex-1 bg-stone/40" aria-hidden="true" />
-    </div>
-  );
-}
+// Portafolio destacado del inicio (mismo orden que la página de portafolio)
+const featuredProjects = ["kahwi", "tree-lodge", "cafetal", "diciembre-seis", "amarea"];
 
 export default async function HomePage({ params }: { params: Params }) {
   const { lang: rawLang } = await params;
@@ -229,8 +218,12 @@ export default async function HomePage({ params }: { params: Params }) {
               {t.home.disciplinesNote}
             </p>
           </Reveal>
-          <Reveal className="mt-14">
-            <DisciplineGrid items={t.homeDisciplines} />
+          <Reveal className="mt-12">
+            <DisciplineAccordion
+              items={t.disciplines}
+              labels={{ stageLabels: t.stageLabels, pathTags: t.pathTags }}
+              dark
+            />
           </Reveal>
           <Reveal className="mt-10">
             <ArrowLink href={`/${lang}/disciplinas`}>{t.home.disciplinesLink}</ArrowLink>
@@ -246,9 +239,8 @@ export default async function HomePage({ params }: { params: Params }) {
           </Reveal>
 
           <Reveal className="mt-14">
-            <PortfolioLabel label={t.home.architectureLabel} />
-            <div className="mt-8 grid gap-6 md:grid-cols-2">
-              {featuredArchitecture.map((slug, i) => {
+            <div className="grid gap-6 md:grid-cols-2">
+              {featuredProjects.map((slug, i) => {
                 const project = getProject(slug);
                 if (!project) return null;
                 const wide = i === 0; // Kahwi abre el portafolio destacado
@@ -262,31 +254,9 @@ export default async function HomePage({ params }: { params: Params }) {
                       tone={(["earth", "charcoal", "stone", "ink", "earth"] as const)[i]}
                       aspect={wide ? "aspect-[16/9]" : "aspect-[4/3]"}
                       sizes={wide ? "(min-width: 1184px) 1104px, 100vw" : undefined}
-                      coverSrc={
-                        wide ? kahwiFeaturedCover : undefined
-                      }
+                      coverSrc={wide ? kahwiFeaturedCover : undefined}
                     />
                   </div>
-                );
-              })}
-            </div>
-          </Reveal>
-
-          <Reveal className="mt-20">
-            <PortfolioLabel label={t.home.lightingLabel} />
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {featuredLighting.map((slug, i) => {
-                const project = getProject(slug);
-                if (!project) return null;
-                return (
-                  <ProjectCard
-                    key={slug}
-                    project={project}
-                    lang={lang}
-                    categoryText={categoryText(project, t)}
-                    alt={t.portfolio.projectAlt(project.name)}
-                    tone={(["ink", "earth", "charcoal"] as const)[i]}
-                  />
                 );
               })}
             </div>
