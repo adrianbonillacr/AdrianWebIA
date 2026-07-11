@@ -78,9 +78,10 @@ export const en: Dictionary = {
     strategyTitle: "A methodology for making better decisions.",
     strategyText:
       "The 19.89 Strategy is a methodology developed to accompany residential, commercial and hospitality projects from their earliest stages through consolidation. Its goal is to help owners and investors make better decisions, set priorities and develop projects capable of standing out and generating long-term value.",
-    strategyLink: "Learn about the methodology",
-    processEyebrow: "From analysis to action",
-    processTitle: "A process that orders decisions before investing.",
+    strategyWhy:
+      "The most important decisions of a project are usually made before the first drawing. The 19.89 Strategy exists to guide them from the start and turn each investment into an opportunity to create greater value.",
+    processEyebrow: "How we work",
+    processTitle: "A process that accompanies from the first decision to consolidation.",
     disciplinesEyebrow: "Disciplines",
     disciplinesTitle: "Disciplines under a single vision.",
     disciplinesNote:
@@ -92,14 +93,14 @@ export const en: Dictionary = {
     seeFullPortfolio: "See full portfolio",
   },
 
+  // 19.89 Strategy process (PDF v2, p5 · How we work)
   processSteps: [
-    { number: "01", title: "We understand", description: "We listen to the goals and understand the project's starting point." },
-    { number: "02", title: "We diagnose", description: "We assess the current state: strengths, risks and opportunities." },
-    { number: "03", title: "We prioritize", description: "We order decisions according to their impact on value." },
-    { number: "04", title: "We design", description: "We translate strategy into spaces, experience and identity." },
-    { number: "05", title: "We develop", description: "We execute the interventions with criteria and supervision." },
-    { number: "06", title: "We position", description: "We communicate the project so the market gets to know it." },
-    { number: "07", title: "We evolve", description: "We accompany growth with a long-term vision." },
+    { number: "01", title: "We discover", description: "We understand the project's goals and identify its potential." },
+    { number: "02", title: "We evaluate", description: "We analyze strengths, opportunities and priorities to guide decision-making." },
+    { number: "03", title: "We plan", description: "We develop a strategic roadmap that defines the path for the project's evolution." },
+    { number: "04", title: "We develop", description: "We implement the disciplines needed to turn the strategy into results." },
+    { number: "05", title: "We position", description: "We build a solid identity and a commercial presence aligned with the project's value." },
+    { number: "06", title: "We evolve", description: "We accompany the project's growth with a long-term vision and new opportunities for improvement." },
   ],
 
   homeDisciplines: [
@@ -127,17 +128,17 @@ export const en: Dictionary = {
     newOnly: "New Project only",
   },
   disciplines: [
-    { slug: "seleccion-de-activos", name: "Asset selection", tagline: "The best investment starts with choosing well.", stage: "asesoria", href: "/proyecto-desde-cero#etapa-1", newOnly: true },
-    { slug: "diagnostico-estrategico", name: "Strategic diagnosis", tagline: "We measure first. We invest after.", stage: "asesoria", href: "/proyecto-ya-construido", newOnly: false },
-    { slug: "analisis-financiero", name: "Strategic financial analysis", tagline: "Investing better starts with understanding the project's potential.", stage: "desarrollo", href: "/proyecto-desde-cero#etapa-2", newOnly: true },
-    { slug: "arquitectura", name: "Architecture", tagline: "Design with strategic grounding, from schematic design to the built work.", stage: "desarrollo", href: "/proyecto-desde-cero#etapa-2", newOnly: true },
-    { slug: "diseno-de-iluminacion", name: "Lighting design", tagline: "Atmospheres that transform the experience of space.", stage: "desarrollo", href: "/proyecto-desde-cero#etapa-2", newOnly: false },
-    { slug: "diseno-de-interiores", name: "Interior design", tagline: "Spatial narrative, materials and curation with intent.", stage: "desarrollo", href: "/proyecto-desde-cero#etapa-2", newOnly: false },
-    { slug: "equipamiento-y-ambientacion", name: "Furnishing & styling", tagline: "Pieces and ambiance that complete the experience.", stage: "desarrollo", href: "/proyecto-desde-cero#etapa-2", newOnly: false },
-    { slug: "proteccion-de-identidad", name: "Brand protection", tagline: "A protected brand is an asset that grows.", stage: "identidad", href: "/proyecto-desde-cero#etapa-3", newOnly: false },
-    { slug: "fotografia-profesional", name: "Professional photography", tagline: "The project deserves to look like what it is.", stage: "identidad", href: "/proyecto-desde-cero#etapa-3", newOnly: false },
-    { slug: "marketing-digital", name: "Digital marketing", tagline: "A great project needs to be visible.", stage: "identidad", href: "/proyecto-desde-cero#etapa-3", newOnly: false },
-    { slug: "automatizacion-y-movilidad", name: "Automation & Mobility", tagline: "Innovation that simplifies operations and adds value.", stage: "tecnologia", href: "/proyecto-desde-cero#etapa-4", newOnly: false },
+    { slug: "seleccion-de-activos", name: "Asset selection", tagline: "The best investment starts with choosing well.", description: "We evaluate real estate opportunities before buying: location, context, development potential and risks, so the investment starts with the right property.", stage: "asesoria", newOnly: true },
+    { slug: "diagnostico-estrategico", name: "Strategic diagnosis", tagline: "We measure first. We invest after.", description: "We analyze the current state of an existing project to identify opportunities, priorities and a clear development route before investing.", stage: "asesoria", newOnly: false },
+    { slug: "analisis-financiero", name: "Strategic financial analysis", tagline: "Investing better starts with understanding the project's potential.", description: "We guide investment with financial criteria: where the greatest value potential lies, how to prioritize resources and how to sustain the project's profitability.", stage: "desarrollo", newOnly: true },
+    { slug: "arquitectura", name: "Architecture", tagline: "Design with strategic grounding, from schematic design to the built work.", description: "Design with strategic grounding: schematic design, development, remodeling and supervision, where every spatial decision is also an investment decision.", stage: "desarrollo", newOnly: true },
+    { slug: "diseno-de-iluminacion", name: "Lighting design", tagline: "Atmospheres that transform the experience of space.", description: "We define atmospheres and lighting criteria that transform the experience of space and bring the architecture to life.", stage: "desarrollo", newOnly: false },
+    { slug: "diseno-de-interiores", name: "Interior design", tagline: "Spatial narrative, materials and curation with intent.", description: "We build the project's spatial narrative: materials, finishes and curation that give each space character and coherence.", stage: "desarrollo", newOnly: false },
+    { slug: "equipamiento-y-ambientacion", name: "Furnishing & styling", tagline: "Pieces and ambiance that complete the experience.", description: "Curation of furniture, pieces and styling that complete the experience and reinforce the project's identity.", stage: "desarrollo", newOnly: false },
+    { slug: "proteccion-de-identidad", name: "Brand protection", tagline: "A protected brand is an asset that grows.", description: "We protect and organize the project's brand: visual identity, registration and positioning so the asset grows with backing.", stage: "identidad", newOnly: false },
+    { slug: "fotografia-profesional", name: "Professional photography", tagline: "The project deserves to look like what it is.", description: "Architectural and hospitality photography with visual direction, so the project looks like what it is and communicates its value.", stage: "identidad", newOnly: false },
+    { slug: "marketing-digital", name: "Digital marketing", tagline: "A great project needs to be visible.", description: "Communication strategy, content and campaigns to make the project visible and connect it with its market.", stage: "identidad", newOnly: false },
+    { slug: "automatizacion-y-movilidad", name: "Automation & Mobility", tagline: "Innovation that simplifies operations and adds value.", description: "Technology that simplifies operations and improves experience: automation, smart control and electric mobility that add value to the project.", stage: "tecnologia", newOnly: false },
   ],
 
   fromZero: {
@@ -347,15 +348,13 @@ export const en: Dictionary = {
       "After the diagnosis, a roadmap with clear priorities is defined. This roadmap allows the disciplines to be engaged comprehensively or by stages according to urgency, impact and budget.",
     roadmapStagesLabel: "Recommended next stages",
     roadmapStages: [
-      { number: "01", title: "Project development", href: "/proyecto-desde-cero#etapa-2" },
-      { number: "02", title: "Identity and positioning", href: "/proyecto-desde-cero#etapa-3" },
-      { number: "03", title: "Automation & Mobility", href: "/proyecto-desde-cero#etapa-4" },
-      { number: "04", title: "From analysis to action", href: "/estrategia" },
+      { number: "01", title: "Project development", description: "We implement the recommended disciplines according to their priority and impact on value." },
+      { number: "02", title: "Identity and positioning", description: "We strengthen the project's brand, photography and communication." },
+      { number: "03", title: "Automation & Mobility", description: "We incorporate technology that improves operations and the user experience." },
+      { number: "04", title: "Evolution", description: "We accompany the project's growth with a long-term vision." },
     ],
-    seeStage: "See stage",
     closingText:
       "Each recommendation seeks to direct resources toward the actions with the greatest potential for impact and value creation. Engagement can be comprehensive or by stages, according to the priorities and goals defined.",
-    closingLink: "Learn about the 19.89 Strategy",
     ctaTitlePart1: "We measure first.",
     ctaTitlePart2: "We invest after.",
     ctaButton: "I want to diagnose my project",
@@ -410,7 +409,10 @@ export const en: Dictionary = {
     heroTitle: "Strategic disciplines",
     heroSubtitle:
       "Specialized tools that integrate according to the needs of each project. None operates in isolation: they all respond to the 19.89 Strategy.",
-    integrateLink: "See how it integrates",
+    integrateLink: "Learn about it",
+    modalLabel: "Discipline detail",
+    modalClose: "Close",
+    modalPillar: "Integrates into",
   },
 
   team: {

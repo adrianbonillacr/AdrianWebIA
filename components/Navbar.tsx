@@ -13,7 +13,6 @@ const darkHeroRoutes = [
   "/",
   "/proyecto-desde-cero",
   "/proyecto-ya-construido",
-  "/estrategia",
   "/portafolio",
 ];
 
@@ -32,7 +31,6 @@ export default function Navbar({ lang, t }: { lang: Lang; t: NavDict }) {
     { href: `/${lang}`, label: t.home },
     { href: `/${lang}/proyecto-desde-cero`, label: t.newProject },
     { href: `/${lang}/proyecto-ya-construido`, label: t.builtProject },
-    { href: `/${lang}/estrategia`, label: t.strategy },
     { href: `/${lang}/disciplinas`, label: t.disciplines },
     { href: `/${lang}/portafolio`, label: t.portfolio },
     { href: `/${lang}/contacto`, label: t.contact },

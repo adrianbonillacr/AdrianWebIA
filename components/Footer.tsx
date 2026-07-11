@@ -32,11 +32,6 @@ export default function Footer({ lang, t }: { lang: Lang; t: Dictionary }) {
                 {t.nav.builtProject}
               </Link>
             </li>
-            <li>
-              <Link href={`/${lang}/disciplinas`} className={footerLink}>
-                {t.nav.disciplines}
-              </Link>
-            </li>
           </ul>
         </nav>
 
@@ -44,8 +39,8 @@ export default function Footer({ lang, t }: { lang: Lang; t: Dictionary }) {
           <h2 className={columnHeading}>{t.footer.studio}</h2>
           <ul className="mt-6 space-y-3">
             <li>
-              <Link href={`/${lang}/estrategia`} className={footerLink}>
-                {t.nav.strategy}
+              <Link href={`/${lang}/disciplinas`} className={footerLink}>
+                {t.nav.disciplines}
               </Link>
             </li>
             <li>

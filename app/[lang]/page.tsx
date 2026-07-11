@@ -10,7 +10,7 @@ import ProjectCard from "@/components/ProjectCard";
 import Reveal from "@/components/Reveal";
 import SectionHeader from "@/components/SectionHeader";
 import { getDict, isLang, type Lang } from "@/lib/i18n";
-import { getProject, type Project } from "@/lib/projects";
+import { getProject, kahwiFeaturedCover, type Project } from "@/lib/projects";
 
 type Params = Promise<{ lang: string }>;
 
@@ -171,8 +171,8 @@ export default async function HomePage({ params }: { params: Params }) {
         </div>
       </section>
 
-      {/* ESTRATEGIA 19.89 — fondo sólido charcoal */}
-      <section className="bg-charcoal text-white">
+      {/* ESTRATEGIA 19.89 — resumen incorporado al inicio (antes página aparte) */}
+      <section id="estrategia" className="scroll-mt-20 bg-charcoal text-white">
         <div className="container-site section-pad">
           <Reveal className="mx-auto max-w-3xl text-center">
             <SectionHeader
@@ -184,9 +184,9 @@ export default async function HomePage({ params }: { params: Params }) {
             <p className="mx-auto mt-8 max-w-[62ch] font-light leading-[1.7] text-mist">
               {t.home.strategyText}
             </p>
-            <div className="mt-10 flex justify-center">
-              <ArrowLink href={`/${lang}/estrategia`}>{t.home.strategyLink}</ArrowLink>
-            </div>
+            <p className="mx-auto mt-6 max-w-[62ch] border-l border-earth pl-5 text-left font-light leading-[1.7] text-mist">
+              {t.home.strategyWhy}
+            </p>
           </Reveal>
         </div>
       </section>
@@ -263,7 +263,7 @@ export default async function HomePage({ params }: { params: Params }) {
                       aspect={wide ? "aspect-[16/9]" : "aspect-[4/3]"}
                       sizes={wide ? "(min-width: 1184px) 1104px, 100vw" : undefined}
                       coverSrc={
-                        wide ? "/images/proyectos/kahwi/cover-destacado.jpg" : undefined
+                        wide ? kahwiFeaturedCover : undefined
                       }
                     />
                   </div>

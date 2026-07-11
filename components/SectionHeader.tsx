@@ -11,6 +11,8 @@ type SectionHeaderProps = {
   align?: "left" | "center";
   className?: string;
   titleClassName?: string;
+  /** Reemplaza el tamaño de fuente por defecto del título (ej. etapas). */
+  titleSizeClassName?: string;
 };
 
 export default function SectionHeader({
@@ -20,6 +22,7 @@ export default function SectionHeader({
   align = "left",
   className,
   titleClassName,
+  titleSizeClassName = "text-[clamp(1.75rem,3.4vw,2.7rem)]",
 }: SectionHeaderProps) {
   const accent = dark ? "text-stone" : "text-earth";
   const dotColor = dark ? "bg-stone" : "bg-earth";
@@ -43,7 +46,7 @@ export default function SectionHeader({
       </div>
       {title && (
         <h2
-          className={`mt-8 max-w-[24ch] text-[clamp(1.75rem,3.4vw,2.7rem)] font-semibold leading-[1.15] ${titleColor} ${
+          className={`mt-8 max-w-[24ch] ${titleSizeClassName} font-semibold leading-[1.15] ${titleColor} ${
             centered ? "mx-auto" : ""
           } ${titleClassName ?? ""}`}
         >

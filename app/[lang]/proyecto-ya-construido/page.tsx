@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import ArrowLink from "@/components/ArrowLink";
 import CtaBanner from "@/components/CtaBanner";
 import InteriorHero from "@/components/InteriorHero";
 import Reveal from "@/components/Reveal";
@@ -126,29 +124,20 @@ export default async function ProyectoYaConstruidoPage({ params }: { params: Par
             <p className="mb-6 text-[0.68rem] font-medium uppercase tracking-[0.26em] text-earth">
               {b.roadmapStagesLabel}
             </p>
+            {/* Cards descriptivas (pilar autocontenido: no llevan a Proyecto Nuevo) */}
             <div className="grid gap-px border border-stone/40 bg-stone/40 sm:grid-cols-2 lg:grid-cols-4">
               {b.roadmapStages.map((stage) => (
-                <Link
-                  key={stage.title}
-                  href={`/${lang}${stage.href}`}
-                  className="group bg-white p-6 transition-colors duration-300 hover:bg-mist/50"
-                >
-                  <span className="text-[clamp(1.6rem,2.6vw,2.1rem)] font-semibold leading-none text-earth">
+                <div key={stage.title} className="bg-white p-6">
+                  <span className="text-[clamp(1.4rem,2.2vw,1.8rem)] font-semibold leading-none text-earth">
                     {stage.number}
                   </span>
                   <p className="mt-4 text-[0.95rem] font-medium leading-snug text-ink">
                     {stage.title}
                   </p>
-                  <span className="mt-3 inline-block text-[0.66rem] font-normal uppercase tracking-[0.22em] text-stone transition-colors duration-300 group-hover:text-earth">
-                    {b.seeStage}{" "}
-                    <span
-                      aria-hidden="true"
-                      className="inline-block transition-transform duration-300 group-hover:translate-x-1"
-                    >
-                      →
-                    </span>
-                  </span>
-                </Link>
+                  <p className="mt-3 text-[0.85rem] font-light leading-[1.6] text-charcoal">
+                    {stage.description}
+                  </p>
+                </div>
               ))}
             </div>
           </Reveal>
@@ -157,9 +146,6 @@ export default async function ProyectoYaConstruidoPage({ params }: { params: Par
             <p className="mx-auto max-w-[56ch] text-[clamp(1.05rem,2vw,1.35rem)] font-light leading-[1.6] text-ink">
               {b.closingText}
             </p>
-            <div className="mt-8 flex justify-center">
-              <ArrowLink href={`/${lang}/estrategia`}>{b.closingLink}</ArrowLink>
-            </div>
           </Reveal>
         </div>
       </section>

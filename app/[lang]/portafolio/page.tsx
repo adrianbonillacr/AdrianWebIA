@@ -4,7 +4,7 @@ import PortfolioFilter from "@/components/PortfolioFilter";
 import ProjectCard, { projectTone } from "@/components/ProjectCard";
 import Reveal from "@/components/Reveal";
 import { getDict, isLang, type Lang } from "@/lib/i18n";
-import { projects } from "@/lib/projects";
+import { kahwiFeaturedCover, projects } from "@/lib/projects";
 
 type Params = Promise<{ lang: string }>;
 
@@ -60,6 +60,10 @@ export default async function PortafolioPage({ params }: { params: Params }) {
                         wide
                           ? "(min-width: 1184px) 1104px, 100vw"
                           : "(min-width: 768px) 50vw, 100vw"
+                      }
+                      // Misma portada destacada de Kahwi que el inicio
+                      coverSrc={
+                        project.slug === "kahwi" ? kahwiFeaturedCover : undefined
                       }
                     />
                   </div>

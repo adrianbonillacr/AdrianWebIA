@@ -10,7 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "", changeFrequency: "monthly", priority: 1 },
     { path: "/proyecto-desde-cero", changeFrequency: "monthly", priority: 0.9 },
     { path: "/proyecto-ya-construido", changeFrequency: "monthly", priority: 0.9 },
-    { path: "/estrategia", changeFrequency: "monthly", priority: 0.8 },
     { path: "/disciplinas", changeFrequency: "monthly", priority: 0.7 },
     { path: "/portafolio", changeFrequency: "monthly", priority: 0.8 },
     { path: "/equipo", changeFrequency: "yearly", priority: 0.4 },

@@ -77,9 +77,11 @@ export const es = {
     strategyTitle: "Una metodología para tomar mejores decisiones.",
     strategyText:
       "La Estrategia 19.89 es una metodología desarrollada para acompañar proyectos residenciales, comerciales y hoteleros desde sus primeras etapas hasta su consolidación. Su objetivo es ayudar a propietarios e inversionistas a tomar mejores decisiones, establecer prioridades y desarrollar proyectos capaces de diferenciarse y generar valor a largo plazo.",
-    strategyLink: "Conocer la metodología",
-    processEyebrow: "Del análisis a la acción",
-    processTitle: "Un proceso que ordena las decisiones antes de invertir.",
+    strategyWhy:
+      "Las decisiones más importantes de un proyecto suelen tomarse antes del primer plano. La Estrategia 19.89 nace para orientarlas desde el inicio y transformar cada inversión en una oportunidad de generar mayor valor.",
+    processEyebrow: "Cómo trabajamos",
+    processTitle:
+      "Un proceso que acompaña de la primera decisión a la consolidación.",
     disciplinesEyebrow: "Disciplinas",
     disciplinesTitle: "Disciplinas bajo una misma visión.",
     disciplinesNote:
@@ -91,14 +93,14 @@ export const es = {
     seeFullPortfolio: "Ver portafolio completo",
   },
 
+  // Proceso de la Estrategia 19.89 (PDF v2, p5 · ¿Cómo trabajamos?)
   processSteps: [
-    { number: "01", title: "Comprendemos", description: "Escuchamos los objetivos y entendemos el punto de partida del proyecto." },
-    { number: "02", title: "Diagnosticamos", description: "Evaluamos el estado actual: fortalezas, riesgos y oportunidades." },
-    { number: "03", title: "Priorizamos", description: "Ordenamos las decisiones según su impacto en el valor." },
-    { number: "04", title: "Diseñamos", description: "Traducimos la estrategia en espacios, experiencia e identidad." },
-    { number: "05", title: "Desarrollamos", description: "Ejecutamos las intervenciones con criterio y supervisión." },
-    { number: "06", title: "Posicionamos", description: "Comunicamos el proyecto para que el mercado lo conozca." },
-    { number: "07", title: "Evolucionamos", description: "Acompañamos el crecimiento con visión de largo plazo." },
+    { number: "01", title: "Descubrimos", description: "Comprendemos los objetivos del proyecto e identificamos su potencial." },
+    { number: "02", title: "Evaluamos", description: "Analizamos fortalezas, oportunidades y prioridades para orientar la toma de decisiones." },
+    { number: "03", title: "Planificamos", description: "Desarrollamos una hoja de ruta estratégica que define el camino para la evolución del proyecto." },
+    { number: "04", title: "Desarrollamos", description: "Implementamos las disciplinas necesarias para transformar la estrategia en resultados." },
+    { number: "05", title: "Posicionamos", description: "Construimos una identidad sólida y una presencia comercial alineada con el valor del proyecto." },
+    { number: "06", title: "Evolucionamos", description: "Acompañamos el crecimiento del proyecto con una visión de largo plazo y nuevas oportunidades de mejora." },
   ],
 
   homeDisciplines: [
@@ -129,17 +131,17 @@ export const es = {
     newOnly: "Solo Proyecto Nuevo",
   },
   disciplines: [
-    { slug: "seleccion-de-activos", name: "Selección de activos", tagline: "La mejor inversión comienza eligiendo bien.", stage: "asesoria", href: "/proyecto-desde-cero#etapa-1", newOnly: true },
-    { slug: "diagnostico-estrategico", name: "Diagnóstico estratégico", tagline: "Medimos primero. Invertimos después.", stage: "asesoria", href: "/proyecto-ya-construido", newOnly: false },
-    { slug: "analisis-financiero", name: "Análisis financiero estratégico", tagline: "Invertir mejor comienza por comprender el potencial del proyecto.", stage: "desarrollo", href: "/proyecto-desde-cero#etapa-2", newOnly: true },
-    { slug: "arquitectura", name: "Arquitectura", tagline: "Diseño con fundamento estratégico, del anteproyecto a la obra.", stage: "desarrollo", href: "/proyecto-desde-cero#etapa-2", newOnly: true },
-    { slug: "diseno-de-iluminacion", name: "Diseño de iluminación", tagline: "Atmósferas que transforman la experiencia del espacio.", stage: "desarrollo", href: "/proyecto-desde-cero#etapa-2", newOnly: false },
-    { slug: "diseno-de-interiores", name: "Diseño de interiores", tagline: "Narrativa espacial, materiales y curaduría con intención.", stage: "desarrollo", href: "/proyecto-desde-cero#etapa-2", newOnly: false },
-    { slug: "equipamiento-y-ambientacion", name: "Equipamiento y ambientación", tagline: "Piezas y ambientación que completan la experiencia.", stage: "desarrollo", href: "/proyecto-desde-cero#etapa-2", newOnly: false },
-    { slug: "proteccion-de-identidad", name: "Protección de identidad", tagline: "Una marca protegida es un activo que crece.", stage: "identidad", href: "/proyecto-desde-cero#etapa-3", newOnly: false },
-    { slug: "fotografia-profesional", name: "Fotografía profesional", tagline: "El proyecto merece verse como lo que es.", stage: "identidad", href: "/proyecto-desde-cero#etapa-3", newOnly: false },
-    { slug: "marketing-digital", name: "Marketing digital", tagline: "Un gran proyecto necesita ser visible.", stage: "identidad", href: "/proyecto-desde-cero#etapa-3", newOnly: false },
-    { slug: "automatizacion-y-movilidad", name: "Automatización y Movilidad", tagline: "Innovación que simplifica la operación y aporta valor.", stage: "tecnologia", href: "/proyecto-desde-cero#etapa-4", newOnly: false },
+    { slug: "seleccion-de-activos", name: "Selección de activos", tagline: "La mejor inversión comienza eligiendo bien.", description: "Evaluamos oportunidades inmobiliarias antes de comprar: ubicación, contexto, potencial de desarrollo y riesgos, para que la inversión comience con la propiedad correcta.", stage: "asesoria", newOnly: true },
+    { slug: "diagnostico-estrategico", name: "Diagnóstico estratégico", tagline: "Medimos primero. Invertimos después.", description: "Analizamos el estado actual de un proyecto existente para identificar oportunidades, prioridades y una ruta clara de desarrollo antes de invertir.", stage: "asesoria", newOnly: false },
+    { slug: "analisis-financiero", name: "Análisis financiero estratégico", tagline: "Invertir mejor comienza por comprender el potencial del proyecto.", description: "Orientamos la inversión con criterio financiero: dónde existe mayor potencial de valor, cómo priorizar recursos y cómo sostener la rentabilidad del proyecto.", stage: "desarrollo", newOnly: true },
+    { slug: "arquitectura", name: "Arquitectura", tagline: "Diseño con fundamento estratégico, del anteproyecto a la obra.", description: "Diseño con fundamento estratégico: anteproyecto, desarrollo, remodelaciones y supervisión, donde cada decisión espacial responde también a una decisión de inversión.", stage: "desarrollo", newOnly: true },
+    { slug: "diseno-de-iluminacion", name: "Diseño de iluminación", tagline: "Atmósferas que transforman la experiencia del espacio.", description: "Definimos atmósferas y criterios lumínicos que transforman la experiencia del espacio y ponen en valor la arquitectura.", stage: "desarrollo", newOnly: false },
+    { slug: "diseno-de-interiores", name: "Diseño de interiores", tagline: "Narrativa espacial, materiales y curaduría con intención.", description: "Construimos la narrativa espacial del proyecto: materiales, acabados y curaduría que dan carácter y coherencia a cada ambiente.", stage: "desarrollo", newOnly: false },
+    { slug: "equipamiento-y-ambientacion", name: "Equipamiento y ambientación", tagline: "Piezas y ambientación que completan la experiencia.", description: "Curaduría de mobiliario, piezas y styling que completan la experiencia y refuerzan la identidad del proyecto.", stage: "desarrollo", newOnly: false },
+    { slug: "proteccion-de-identidad", name: "Protección de identidad", tagline: "Una marca protegida es un activo que crece.", description: "Protegemos y ordenamos la marca del proyecto: identidad visual, registro y posicionamiento para que el activo crezca con respaldo.", stage: "identidad", newOnly: false },
+    { slug: "fotografia-profesional", name: "Fotografía profesional", tagline: "El proyecto merece verse como lo que es.", description: "Fotografía arquitectónica y hotelera con dirección visual, para que el proyecto se vea como lo que es y comunique su valor.", stage: "identidad", newOnly: false },
+    { slug: "marketing-digital", name: "Marketing digital", tagline: "Un gran proyecto necesita ser visible.", description: "Estrategia de comunicación, contenido y campañas para hacer visible el proyecto y conectarlo con su mercado.", stage: "identidad", newOnly: false },
+    { slug: "automatizacion-y-movilidad", name: "Automatización y Movilidad", tagline: "Innovación que simplifica la operación y aporta valor.", description: "Tecnología que simplifica la operación y mejora la experiencia: automatización, control inteligente y movilidad eléctrica que suman valor al proyecto.", stage: "tecnologia", newOnly: false },
   ],
 
   fromZero: {
@@ -349,15 +351,13 @@ export const es = {
       "Después del diagnóstico, se define una hoja de ruta con prioridades claras. Esta hoja de ruta permite contratar las disciplinas de forma integral o por etapas según el nivel de urgencia, impacto y presupuesto.",
     roadmapStagesLabel: "Etapas posteriores recomendadas",
     roadmapStages: [
-      { number: "01", title: "Desarrollo del proyecto", href: "/proyecto-desde-cero#etapa-2" },
-      { number: "02", title: "Identidad y posicionamiento", href: "/proyecto-desde-cero#etapa-3" },
-      { number: "03", title: "Automatización y Movilidad", href: "/proyecto-desde-cero#etapa-4" },
-      { number: "04", title: "Del análisis a la acción", href: "/estrategia" },
+      { number: "01", title: "Desarrollo del proyecto", description: "Implementamos las disciplinas recomendadas según su prioridad e impacto en el valor." },
+      { number: "02", title: "Identidad y posicionamiento", description: "Fortalecemos la marca, la fotografía y la comunicación del proyecto." },
+      { number: "03", title: "Automatización y Movilidad", description: "Incorporamos tecnología que mejora la operación y la experiencia del usuario." },
+      { number: "04", title: "Evolución", description: "Acompañamos el crecimiento del proyecto con una visión de largo plazo." },
     ],
-    seeStage: "Ver etapa",
     closingText:
       "Cada recomendación busca orientar los recursos hacia aquellas acciones con mayor potencial de impacto y generación de valor. La contratación puede realizarse de forma integral o por etapas, según las prioridades y objetivos definidos.",
-    closingLink: "Conocer la Estrategia 19.89",
     ctaTitlePart1: "Medimos primero.",
     ctaTitlePart2: "Invertimos después.",
     ctaButton: "Quiero diagnosticar mi proyecto",
@@ -412,7 +412,10 @@ export const es = {
     heroTitle: "Disciplinas estratégicas",
     heroSubtitle:
       "Herramientas especializadas que se integran según las necesidades de cada proyecto. Ninguna opera de forma aislada: todas responden a la Estrategia 19.89.",
-    integrateLink: "Ver cómo se integra",
+    integrateLink: "Conocer disciplina",
+    modalLabel: "Detalle de la disciplina",
+    modalClose: "Cerrar",
+    modalPillar: "Se integra en",
   },
 
   team: {

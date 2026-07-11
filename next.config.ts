@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
     const paths = [
       "proyecto-desde-cero",
       "proyecto-ya-construido",
-      "estrategia",
       "disciplinas",
       "equipo",
       "contacto",
@@ -23,6 +22,10 @@ const nextConfig: NextConfig = {
         destination: "/es/portafolio/:slug",
         permanent: true,
       },
+      // Estrategia dejó de ser página propia: ahora vive en el inicio
+      { source: "/estrategia", destination: "/es", permanent: true },
+      { source: "/es/estrategia", destination: "/es", permanent: true },
+      { source: "/en/estrategia", destination: "/en", permanent: true },
     ];
   },
 };

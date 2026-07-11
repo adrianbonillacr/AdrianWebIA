@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import CtaBanner from "@/components/CtaBanner";
-import Reveal from "@/components/Reveal";
+import DisciplinesExplorer from "@/components/DisciplinesExplorer";
 import { getDict, isLang, type Lang } from "@/lib/i18n";
 
 type Params = Promise<{ lang: string }>;
@@ -43,47 +42,20 @@ export default async function DisciplinasPage({ params }: { params: Params }) {
         </div>
       </section>
 
-      {/* Cards */}
+      {/* Grid + modal de detalle por disciplina */}
       <section className="section-pad bg-white">
         <div className="container-site">
-          <div className="grid gap-px border border-stone/40 bg-stone/40 sm:grid-cols-2 lg:grid-cols-3">
-            {t.disciplines.map((discipline, i) => (
-              <Reveal key={discipline.slug} className="h-full" delay={(i % 3) * 80}>
-                {/* Toda la card es clicable */}
-                <Link
-                  href={`/${lang}${discipline.href}`}
-                  className="group relative flex h-full flex-col bg-white p-8 transition-colors duration-300 hover:bg-mist/40"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-earth transition-transform duration-500 group-hover:scale-x-100"
-                  />
-                  <p className="text-[0.62rem] font-medium uppercase tracking-[0.24em] text-stone">
-                    {t.stageLabels[discipline.stage as keyof typeof t.stageLabels]}
-                  </p>
-                  <h2 className="mt-4 text-xl font-semibold leading-snug text-ink transition-colors duration-300 group-hover:text-earth">
-                    {discipline.name}
-                  </h2>
-                  <p className="mt-3 max-w-[42ch] font-light leading-[1.65] text-charcoal">
-                    {discipline.tagline}
-                  </p>
-                  {/* A qué camino pertenece la disciplina */}
-                  <p className="mt-5 w-fit border border-stone/40 px-2.5 py-1 text-[0.6rem] font-normal uppercase tracking-[0.18em] text-charcoal">
-                    {discipline.newOnly ? t.pathTags.newOnly : t.pathTags.both}
-                  </p>
-                  <span className="mt-auto inline-flex items-center gap-3 pt-7 text-[0.72rem] font-normal uppercase tracking-[0.18em] text-earth">
-                    {d.integrateLink}
-                    <span
-                      aria-hidden="true"
-                      className="transition-transform duration-300 group-hover:translate-x-1.5"
-                    >
-                      →
-                    </span>
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
+          <DisciplinesExplorer
+            disciplines={t.disciplines}
+            labels={{
+              stageLabels: t.stageLabels,
+              pathTags: t.pathTags,
+              integrateLink: d.integrateLink,
+              modalLabel: d.modalLabel,
+              modalClose: d.modalClose,
+              modalPillar: d.modalPillar,
+            }}
+          />
         </div>
       </section>
 

@@ -73,12 +73,16 @@ export default async function ProyectoDesdeCeroPage({ params }: { params: Params
             <div className="flex items-end gap-6">
               <span
                 aria-hidden="true"
-                className="text-[clamp(3.4rem,7vw,5.5rem)] font-semibold leading-[0.85] text-earth"
+                className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold leading-none text-earth"
               >
                 01
               </span>
               <div className="flex-1 pb-2">
-                <SectionHeader eyebrow={z.stage1Eyebrow} title={z.stage1Title} />
+                <SectionHeader
+                  eyebrow={z.stage1Eyebrow}
+                  title={z.stage1Title}
+                  titleSizeClassName="text-[clamp(2.1rem,4.4vw,3.4rem)]"
+                />
               </div>
             </div>
             <p className="mt-8 max-w-[62ch] font-light leading-[1.7] text-charcoal">
@@ -157,12 +161,16 @@ export default async function ProyectoDesdeCeroPage({ params }: { params: Params
             <div className="flex items-end gap-6">
               <span
                 aria-hidden="true"
-                className="text-[clamp(3.4rem,7vw,5.5rem)] font-semibold leading-[0.85] text-earth"
+                className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold leading-none text-earth"
               >
                 02
               </span>
               <div className="flex-1 pb-2">
-                <SectionHeader eyebrow={z.stage2Eyebrow} title={z.stage2Title} />
+                <SectionHeader
+                  eyebrow={z.stage2Eyebrow}
+                  title={z.stage2Title}
+                  titleSizeClassName="text-[clamp(2.1rem,4.4vw,3.4rem)]"
+                />
               </div>
             </div>
             <p className="mt-8 max-w-[62ch] font-light leading-[1.7] text-charcoal">
@@ -215,7 +223,7 @@ export default async function ProyectoDesdeCeroPage({ params }: { params: Params
             <div className="flex items-end gap-6">
               <span
                 aria-hidden="true"
-                className="text-[clamp(3.4rem,7vw,5.5rem)] font-semibold leading-[0.85] text-earth"
+                className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold leading-none text-earth"
               >
                 03
               </span>
@@ -224,6 +232,7 @@ export default async function ProyectoDesdeCeroPage({ params }: { params: Params
                   eyebrow={z.stage3Eyebrow}
                   title={z.stage3Title}
                   titleClassName="max-w-[28ch]"
+                  titleSizeClassName="text-[clamp(2.1rem,4.4vw,3.4rem)]"
                 />
               </div>
             </div>
@@ -325,7 +334,7 @@ export default async function ProyectoDesdeCeroPage({ params }: { params: Params
             <div className="flex items-end gap-6">
               <span
                 aria-hidden="true"
-                className="text-[clamp(3.4rem,7vw,5.5rem)] font-semibold leading-[0.85] text-earth"
+                className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold leading-none text-earth"
               >
                 04
               </span>
@@ -334,6 +343,7 @@ export default async function ProyectoDesdeCeroPage({ params }: { params: Params
                   eyebrow={z.stage4Eyebrow}
                   title={z.stage4Title}
                   titleClassName="max-w-[30ch]"
+                  titleSizeClassName="text-[clamp(2.1rem,4.4vw,3.4rem)]"
                   dark
                 />
               </div>
