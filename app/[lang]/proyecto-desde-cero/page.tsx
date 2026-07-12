@@ -70,14 +70,14 @@ export default async function ProyectoDesdeCeroPage({ params }: { params: Params
       <section id="etapa-1" className="section-pad scroll-mt-24 bg-white">
         <div className="container-site">
           <Reveal>
-            <div className="flex items-end gap-6">
+            <div>
               <span
                 aria-hidden="true"
-                className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold leading-none text-earth"
+                className="block text-[clamp(1.3rem,2vw,1.7rem)] font-semibold leading-none text-earth"
               >
                 01
               </span>
-              <div className="flex-1 pb-2">
+              <div className="mt-5">
                 <SectionHeader
                   eyebrow={z.stage1Eyebrow}
                   title={z.stage1Title}
@@ -158,14 +158,14 @@ export default async function ProyectoDesdeCeroPage({ params }: { params: Params
       <section id="etapa-2" className="section-pad scroll-mt-24 bg-mist">
         <div className="container-site">
           <Reveal>
-            <div className="flex items-end gap-6">
+            <div>
               <span
                 aria-hidden="true"
-                className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold leading-none text-earth"
+                className="block text-[clamp(1.3rem,2vw,1.7rem)] font-semibold leading-none text-earth"
               >
                 02
               </span>
-              <div className="flex-1 pb-2">
+              <div className="mt-5">
                 <SectionHeader
                   eyebrow={z.stage2Eyebrow}
                   title={z.stage2Title}
@@ -220,14 +220,14 @@ export default async function ProyectoDesdeCeroPage({ params }: { params: Params
       <section id="etapa-3" className="section-pad scroll-mt-24 bg-white">
         <div className="container-site">
           <Reveal>
-            <div className="flex items-end gap-6">
+            <div>
               <span
                 aria-hidden="true"
-                className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold leading-none text-earth"
+                className="block text-[clamp(1.3rem,2vw,1.7rem)] font-semibold leading-none text-earth"
               >
                 03
               </span>
-              <div className="flex-1 pb-2">
+              <div className="mt-5">
                 <SectionHeader
                   eyebrow={z.stage3Eyebrow}
                   title={z.stage3Title}
@@ -331,14 +331,14 @@ export default async function ProyectoDesdeCeroPage({ params }: { params: Params
       <section id="etapa-4" className="section-pad scroll-mt-24 bg-ink text-white">
         <div className="container-site">
           <Reveal>
-            <div className="flex items-end gap-6">
+            <div>
               <span
                 aria-hidden="true"
-                className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold leading-none text-earth"
+                className="block text-[clamp(1.3rem,2vw,1.7rem)] font-semibold leading-none text-earth"
               >
                 04
               </span>
-              <div className="flex-1 pb-2">
+              <div className="mt-5">
                 <SectionHeader
                   eyebrow={z.stage4Eyebrow}
                   title={z.stage4Title}

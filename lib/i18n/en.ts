@@ -324,7 +324,7 @@ export const en: Dictionary = {
     introEyebrow: "Strategic Project Diagnosis",
     introText:
       "The Strategic Project Diagnosis is designed to understand how an existing property works, detect improvement opportunities and establish a clear strategy to increase its experience, differentiation and long-term value.",
-    whyEyebrow: "Why start with a diagnosis?",
+    whyEyebrow: "Stage 1 · Strategic diagnosis",
     whyTitle: "The best decisions are made when there is clarity.",
     whyText:
       "Before investing, remodeling or implementing new disciplines, it is essential to understand how the project works, what its strengths are and where the greatest improvement opportunities lie.",
@@ -336,13 +336,13 @@ export const en: Dictionary = {
       "Establishing intervention priorities.",
       "Guiding future investments through a clear strategy.",
     ],
-    indexEyebrow: "19.89 Value Index",
+    indexEyebrow: "Stage 2 · 19.89 Value Index",
     indexTitle: "Five dimensions to understand where to invest first.",
     indexText:
       "The result of the diagnosis shows where to invest first and which actions can generate the greatest impact.",
     indexNote:
       "Visual example — the real measurement is built during each project's diagnosis",
-    roadmapEyebrow: "Project Roadmap",
+    roadmapEyebrow: "Stage 3 · Project Roadmap",
     roadmapTitle: "Clear priorities, ordered investment.",
     roadmapText:
       "After the diagnosis, a roadmap with clear priorities is defined. This roadmap allows the disciplines to be engaged comprehensively or by stages according to urgency, impact and budget.",

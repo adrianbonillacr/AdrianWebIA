@@ -327,7 +327,7 @@ export const es = {
     introEyebrow: "Diagnóstico Estratégico del Proyecto",
     introText:
       "El Diagnóstico Estratégico del Proyecto está diseñado para comprender cómo funciona una propiedad existente, detectar oportunidades de mejora y establecer una estrategia clara para aumentar su experiencia, diferenciación y valor a largo plazo.",
-    whyEyebrow: "¿Por qué comenzar con un diagnóstico?",
+    whyEyebrow: "Etapa 1 · Diagnóstico Estratégico",
     whyTitle: "Las mejores decisiones se toman cuando existe claridad.",
     whyText:
       "Antes de invertir, remodelar o implementar nuevas disciplinas, es fundamental comprender cómo funciona el proyecto, cuáles son sus fortalezas y dónde se encuentran las mayores oportunidades de mejora.",
@@ -339,13 +339,13 @@ export const es = {
       "Establecer prioridades de intervención.",
       "Orientar futuras inversiones mediante una estrategia clara.",
     ],
-    indexEyebrow: "Índice de Valor 19.89",
+    indexEyebrow: "Etapa 2 · Índice de Valor 19.89",
     indexTitle: "Cinco dimensiones para entender dónde invertir primero.",
     indexText:
       "El resultado del diagnóstico permite entender dónde invertir primero y qué acciones pueden generar mayor impacto.",
     indexNote:
       "Ejemplo visual — la medición real se construye durante el diagnóstico de cada proyecto",
-    roadmapEyebrow: "Proyecto Roadmap",
+    roadmapEyebrow: "Etapa 3 · Proyecto Roadmap",
     roadmapTitle: "Prioridades claras, inversión ordenada.",
     roadmapText:
       "Después del diagnóstico, se define una hoja de ruta con prioridades claras. Esta hoja de ruta permite contratar las disciplinas de forma integral o por etapas según el nivel de urgencia, impacto y presupuesto.",

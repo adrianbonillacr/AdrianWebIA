@@ -40,6 +40,12 @@ export default async function ProyectoYaConstruidoPage({ params }: { params: Par
       <section className="section-pad bg-white">
         <div className="container-site">
           <Reveal>
+            <span
+              aria-hidden="true"
+              className="mb-5 block text-[clamp(1.3rem,2vw,1.7rem)] font-semibold leading-none text-earth"
+            >
+              01
+            </span>
             <div className="grid gap-10 md:grid-cols-[1fr_1.5fr] md:gap-16">
               <SectionHeader eyebrow={b.whyEyebrow} title={b.whyTitle} />
               <p className="max-w-[56ch] self-end text-lg font-light leading-[1.7] text-charcoal">
@@ -57,10 +63,10 @@ export default async function ProyectoYaConstruidoPage({ params }: { params: Par
             <ul role="list">
               {b.goals.map((goal, i) => (
                 <Reveal key={goal} delay={i * 80}>
-                  <li className="grid grid-cols-[4rem_1fr] items-baseline gap-6 border-t border-stone/40 py-7 md:grid-cols-[7rem_1fr] md:gap-8">
+                  <li className="grid grid-cols-[2.5rem_1fr] items-baseline gap-4 border-t border-stone/40 py-6 md:gap-6">
                     <span
                       aria-hidden="true"
-                      className="text-[clamp(1.8rem,3vw,2.4rem)] font-semibold leading-none text-earth"
+                      className="text-[0.9rem] font-semibold leading-none tracking-[0.1em] text-earth"
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -80,6 +86,12 @@ export default async function ProyectoYaConstruidoPage({ params }: { params: Par
       <section className="section-pad bg-charcoal text-white">
         <div className="container-site">
           <Reveal>
+            <span
+              aria-hidden="true"
+              className="mb-5 block text-[clamp(1.3rem,2vw,1.7rem)] font-semibold leading-none text-earth"
+            >
+              02
+            </span>
             <SectionHeader eyebrow={b.indexEyebrow} title={b.indexTitle} dark />
             <p className="mt-6 max-w-[56ch] font-light leading-[1.7] text-mist">
               {b.indexText}
@@ -112,6 +124,12 @@ export default async function ProyectoYaConstruidoPage({ params }: { params: Par
       <section className="section-pad bg-white">
         <div className="container-site">
           <Reveal>
+            <span
+              aria-hidden="true"
+              className="mb-5 block text-[clamp(1.3rem,2vw,1.7rem)] font-semibold leading-none text-earth"
+            >
+              03
+            </span>
             <div className="grid gap-10 md:grid-cols-[1fr_1.5fr] md:gap-16">
               <SectionHeader eyebrow={b.roadmapEyebrow} title={b.roadmapTitle} />
               <p className="max-w-[56ch] self-end text-lg font-light leading-[1.7] text-charcoal">
