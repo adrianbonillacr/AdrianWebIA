@@ -18,12 +18,44 @@ const fieldInput =
  * backend propio). Al enviar, FormSubmit entrega el correo a siteConfig.email
  * y redirige de vuelta a la página de contacto con ?enviado=1.
  *
+ * Además, cada envío se registra en el Google Sheet de contactos mediante un
+ * webhook de Apps Script (siteConfig.contactSheetWebhook): se dispara un
+ * fetch con keepalive justo antes del POST nativo, así sobrevive a la
+ * navegación. Instrucciones del webhook: docs/contactos-sheet.md
+ *
  * IMPORTANTE (una sola vez): el PRIMER envío desde el sitio publicado dispara
- * un correo de activación a siteConfig.email; hay que abrirlo y confirmar.
+ * un correo de activación de FormSubmit a siteConfig.email; hay que abrirlo
+ * y confirmar.
  *
  * TODO: si más adelante se quiere control total (plantillas, dominio propio),
  * migrar a Resend con una API route.
  */
+function logToSheet(form: HTMLFormElement) {
+  const webhook = siteConfig.contactSheetWebhook;
+  if (!webhook) return;
+  const data = new FormData(form);
+  const params = new URLSearchParams({
+    nombre: String(data.get("Nombre") ?? ""),
+    correo: String(data.get("email") ?? ""),
+    telefono: String(data.get("Telefono") ?? ""),
+    etapa: String(data.get("Etapa del proyecto") ?? ""),
+    mensaje: String(data.get("Mensaje") ?? ""),
+    idioma: document.documentElement.lang || "es",
+    origen: window.location.href,
+  });
+  // Fire-and-forget: no bloquea ni condiciona el envío del correo.
+  try {
+    void fetch(webhook, {
+      method: "POST",
+      mode: "no-cors",
+      keepalive: true,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString(),
+    });
+  } catch {
+    // El registro en el sheet es secundario; el correo sigue su curso.
+  }
+}
 export default function ContactForm({ t }: { t: FormDict }) {
   const searchParams = useSearchParams();
   const etapaParam = searchParams.get("etapa");
@@ -63,6 +95,7 @@ export default function ContactForm({ t }: { t: FormDict }) {
     <form
       action={`https://formsubmit.co/${siteConfig.email}`}
       method="POST"
+      onSubmit={(e) => logToSheet(e.currentTarget)}
       className="space-y-9"
     >
       {/* Configuración de FormSubmit */}

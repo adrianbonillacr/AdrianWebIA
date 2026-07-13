@@ -47,6 +47,7 @@ Otros contenidos pendientes del cliente:
 - Descripciones de proyectos (solo Tree Lodge tiene texto real) → `/lib/projects.ts` (campo `excerpt`)
 - Logo oficial en SVG → reemplazar el interior de `/components/Logo.tsx`
 - Formulario de contacto → envía correos reales vía [FormSubmit](https://formsubmit.co) a `siteConfig.email`. **El primer envío desde el sitio publicado dispara un correo de activación a esa bandeja: hay que abrirlo y confirmar una única vez.** Para control total a futuro, migrar a Resend (`TODO` en `/components/ContactForm.tsx`)
+- Registro de consultas en el **Google Sheet de contactos** → falta un paso único del dueño del sheet (desplegar el Apps Script y pegar la URL en `contactSheetWebhook`): instrucciones en [docs/contactos-sheet.md](docs/contactos-sheet.md)
 
 ## Swap de Poppins a Gilroy (cuando exista la licencia)
 

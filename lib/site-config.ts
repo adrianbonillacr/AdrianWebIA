@@ -11,5 +11,11 @@ export const siteConfig = {
   // El botón "Agendar reunión" lleva a la página de contacto.
   // TODO: si se contrata Calendly u otra agenda, poner el link aquí.
   calendarUrl: "/contacto",
+  // Webhook (Apps Script Web App) que registra cada consulta en el Google
+  // Sheet de contactos. Instrucciones para generarlo: docs/contactos-sheet.md
+  // TODO: pegar aquí la URL que termina en /exec al desplegar el script.
+  contactSheetWebhook: "",
+  contactSheetUrl:
+    "https://docs.google.com/spreadsheets/d/1MK7espfDD54J_O_S68vc--9D0sgE-RyHWt2FNuPgmgo/edit",
   domain: "https://1989arquitectura.com",
 };
